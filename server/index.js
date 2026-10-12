@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { fileURLToPath } from 'url';
 
 import {
@@ -73,10 +74,22 @@ if (isCloudinaryConfigured) {
   console.log('ℹ️ Cloudinary credentials pending in .env; utilizing local disk Multer fallback.');
 }
 
-// Multer Storage Configuration (Cloudinary when configured, local disk fallback)
-const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+// Multer Storage Configuration (Cloudinary when configured, serverless-safe disk fallback)
+let uploadsDir = path.join(__dirname, 'uploads');
+try {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+} catch (e) {
+  // Read-only filesystem in Vercel serverless runtime: use os tmpdir
+  uploadsDir = path.join(os.tmpdir(), '1ticket-uploads');
+  try {
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true });
+    }
+  } catch (err) {
+    console.warn('Filesystem read-only note:', err.message);
+  }
 }
 
 let storage;
@@ -90,16 +103,26 @@ if (isCloudinaryConfigured) {
     }
   });
 } else {
-  storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, uploadsDir);
-    },
-    filename: function (req, file, cb) {
-      const ext = path.extname(file.originalname);
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-      cb(null, 'coupon-' + uniqueSuffix + ext);
-    }
-  });
+  // Check if uploadsDir is actually writable, else use memoryStorage
+  let useDisk = false;
+  try {
+    if (fs.existsSync(uploadsDir)) useDisk = true;
+  } catch (e) {}
+
+  if (useDisk) {
+    storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, uploadsDir);
+      },
+      filename: function (req, file, cb) {
+        const ext = path.extname(file.originalname);
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        cb(null, 'coupon-' + uniqueSuffix + ext);
+      }
+    });
+  } else {
+    storage = multer.memoryStorage();
+  }
 }
 
 const upload = multer({
@@ -146,13 +169,19 @@ app.options('*', cors());
 app.use(express.json());
 
 // Serve uploaded images statically
-app.use('/uploads', express.static(uploadsDir));
+try {
+  if (fs.existsSync(uploadsDir)) {
+    app.use('/uploads', express.static(uploadsDir));
+  }
+} catch (e) {}
 
-// Also copy or serve client coupons folder if requested
-const clientCouponsDir = path.join(__dirname, '../client/public/coupons');
-if (fs.existsSync(clientCouponsDir)) {
-  app.use('/coupons', express.static(clientCouponsDir));
-}
+// Also serve coupons folder if present
+try {
+  const clientCouponsDir = path.join(__dirname, '../client/public/coupons');
+  if (fs.existsSync(clientCouponsDir)) {
+    app.use('/coupons', express.static(clientCouponsDir));
+  }
+} catch (e) {}
 
 // Ensure Database is initialized on serverless requests
 let dbInitPromise = null;
