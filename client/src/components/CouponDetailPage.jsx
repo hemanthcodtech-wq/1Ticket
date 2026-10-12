@@ -22,7 +22,8 @@ import {
   Zap,
   Share2,
   ExternalLink,
-  Loader2
+  Loader2,
+  ArrowRight
 } from 'lucide-react';
 import TypewriterHeader from './TypewriterHeader';
 import { getApiUrl } from '../config/api';
@@ -257,56 +258,61 @@ export default function CouponDetailPage({
     }
   };
 
+  const formatEventDate = (dateStr) => {
+    if (!dateStr) return 'Limited Time Offer';
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return String(dateStr);
+      return d.toLocaleDateString('en-IN', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    } catch {
+      return String(dateStr);
+    }
+  };
+
+  const scrollToCheckout = () => {
+    const el = document.getElementById('coupon-checkout-card');
+    if (el) {
+      const yOffset = -110;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div style={{ minHeight: '100vh', background: '#060709', color: '#ffffff', paddingBottom: '80px' }}>
+    <div className="coupon-detail-page-container">
       {/* Top Breadcrumb & Back Navigation */}
-      <div style={{
-        background: '#0a0d14',
-        borderBottom: '1px solid rgba(212, 175, 55, 0.18)',
-        padding: '14px 24px',
-        position: 'sticky',
-        top: '72px',
-        zIndex: 20,
-        backdropFilter: 'blur(10px)'
-      }}>
-        <div style={{ maxWidth: '1320px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="coupon-breadcrumb-wrapper">
+        <div className="coupon-breadcrumb-content">
           <button
             onClick={onBack}
-            style={{
-              background: 'transparent',
-              color: '#f6c042',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              fontSize: '0.88rem',
-              fontWeight: 600,
-              padding: '6px 12px',
-              borderRadius: '6px',
-              border: '1px solid rgba(212, 175, 55, 0.3)'
-            }}
+            className="coupon-back-btn"
           >
             <ArrowLeft size={16} />
             <span>Back to All Coupons</span>
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', color: '#9ca3af' }}>
+          <div className="coupon-breadcrumb-trail">
             <span>Coupons</span>
             <span>/</span>
             <span style={{ color: '#d1d5db' }}>{coupon.category || 'Exclusive Offer'}</span>
             <span>/</span>
-            <span style={{ color: '#f6c042', fontWeight: 600 }}>{coupon.title}</span>
+            <span className="coupon-breadcrumb-title">{coupon.title}</span>
           </div>
         </div>
       </div>
 
-      <div style={{ maxWidth: '1320px', margin: '24px auto 0', padding: '0 clamp(14px, 3vw, 24px)' }}>
+      <div className="coupon-detail-content-wrap" style={{ maxWidth: '1320px', width: '100%', margin: '20px auto 0', padding: '0 clamp(14px, 3vw, 24px)', boxSizing: 'border-box' }}>
         {/* Main 2-Column Split: Details on Left, Buy & Person Info on Right */}
         <div className="coupon-detail-grid">
           
           {/* ========================================================= */}
           {/* LEFT COLUMN: HERO BANNER, SPECS, FESTIVE PERKS, TABS      */}
           {/* ========================================================= */}
-          <div>
+          <div className="coupon-detail-main-col" style={{ minWidth: 0, maxWidth: '100%', width: '100%', boxSizing: 'border-box' }}>
             {/* Visual Hero Image Card */}
             <div style={{
               background: '#0d1017',
@@ -314,9 +320,12 @@ export default function CouponDetailPage({
               borderRadius: '16px',
               overflow: 'hidden',
               boxShadow: '0 16px 40px rgba(0, 0, 0, 0.65)',
-              position: 'relative'
+              position: 'relative',
+              width: '100%',
+              maxWidth: '100%',
+              boxSizing: 'border-box'
             }}>
-              <div style={{ position: 'relative', width: '100%', height: 'clamp(230px, 44vw, 380px)' }}>
+              <div style={{ position: 'relative', width: '100%', height: 'clamp(210px, 44vw, 380px)' }}>
                 <img
                   src={coupon.image_url}
                   alt={coupon.title}
@@ -329,7 +338,16 @@ export default function CouponDetailPage({
                 }} />
 
                 {/* Badge tags */}
-                <div style={{ position: 'absolute', top: '18px', left: '18px', display: 'flex', gap: '8px' }}>
+                <div style={{
+                  position: 'absolute',
+                  top: 'clamp(12px, 2.5vw, 18px)',
+                  left: 'clamp(12px, 2.5vw, 18px)',
+                  right: 'clamp(12px, 2.5vw, 18px)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '8px',
+                  zIndex: 2
+                }}>
                   <div style={{
                     background: 'linear-gradient(135deg, #b91c1c 0%, #881337 100%)',
                     border: '1px solid rgba(254, 202, 202, 0.3)',
@@ -363,10 +381,16 @@ export default function CouponDetailPage({
                 </div>
 
                 {/* Overlaid Title on bottom of hero */}
-                <div style={{ position: 'absolute', bottom: '22px', left: '24px', right: '24px' }}>
+                <div style={{
+                  position: 'absolute',
+                  bottom: 'clamp(14px, 3vw, 22px)',
+                  left: 'clamp(14px, 3vw, 24px)',
+                  right: 'clamp(14px, 3vw, 24px)',
+                  zIndex: 2
+                }}>
                   <span style={{
                     color: '#f6c042',
-                    fontSize: '0.78rem',
+                    fontSize: '0.75rem',
                     fontWeight: 700,
                     letterSpacing: '0.1em',
                     textTransform: 'uppercase',
@@ -382,43 +406,39 @@ export default function CouponDetailPage({
                     delay={100}
                     style={{
                       fontFamily: 'var(--font-serif)',
-                      fontSize: '2.1rem',
+                      fontSize: 'clamp(1.35rem, 4.5vw, 2.1rem)',
                       fontWeight: 800,
                       color: '#ffffff',
-                      lineHeight: 1.2,
-                      margin: 0
+                      lineHeight: 1.25,
+                      margin: 0,
+                      wordBreak: 'break-word'
                     }}
                   />
                 </div>
               </div>
 
               {/* Quick Metadata Bar */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                borderTop: '1px solid rgba(212, 175, 55, 0.2)',
-                background: '#090b10'
-              }}>
-                <div style={{ padding: '16px 20px', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="coupon-metadata-bar">
+                <div className="coupon-metadata-item">
                   <span style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', display: 'block' }}>
                     <MapPin size={12} style={{ display: 'inline', marginRight: '4px', color: '#f6c042' }} />
                     Location
                   </span>
-                  <strong style={{ fontSize: '0.9rem', color: '#f3f4f6' }}>{coupon.location || 'Bangalore / Regional'}</strong>
+                  <strong style={{ fontSize: '0.88rem', color: '#f3f4f6' }}>{coupon.location || 'Bangalore / Regional'}</strong>
                 </div>
-                <div style={{ padding: '16px 20px', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+                <div className="coupon-metadata-item">
                   <span style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', display: 'block' }}>
                     <Calendar size={12} style={{ display: 'inline', marginRight: '4px', color: '#f6c042' }} />
                     Valid Through
                   </span>
-                  <strong style={{ fontSize: '0.9rem', color: '#f3f4f6' }}>{coupon.event_date || '2026-11-30'}</strong>
+                  <strong style={{ fontSize: '0.88rem', color: '#f3f4f6' }}>{formatEventDate(coupon.event_date)}</strong>
                 </div>
-                <div style={{ padding: '16px 20px' }}>
+                <div className="coupon-metadata-item">
                   <span style={{ fontSize: '0.7rem', color: '#9ca3af', textTransform: 'uppercase', display: 'block' }}>
                     <ShieldCheck size={12} style={{ display: 'inline', marginRight: '4px', color: '#22c55e' }} />
                     Verification
                   </span>
-                  <strong style={{ fontSize: '0.9rem', color: '#22c55e' }}> Certified QR</strong>
+                  <strong style={{ fontSize: '0.88rem', color: '#22c55e' }}> Certified QR</strong>
                 </div>
               </div>
             </div>
@@ -426,12 +446,16 @@ export default function CouponDetailPage({
             {/* Navigation Tabs (Overview, Offer Benefits, Terms) */}
             <div className="coupon-detail-tabs" style={{
               display: 'flex',
-              gap: '12px',
+              gap: '8px',
               borderBottom: '1px solid rgba(255,255,255,0.1)',
-              margin: '28px 0 20px',
+              margin: '24px 0 18px',
               paddingBottom: '2px',
               overflowX: 'auto',
-              WebkitOverflowScrolling: 'touch'
+              WebkitOverflowScrolling: 'touch',
+              width: '100%',
+              maxWidth: '100%',
+              minWidth: 0,
+              boxSizing: 'border-box'
             }}>
               {[
                 { id: 'overview', label: 'Offer Details & Highlights' },
@@ -441,16 +465,11 @@ export default function CouponDetailPage({
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
+                  className="coupon-tab-btn"
                   style={{
-                    background: 'transparent',
-                    border: 'none',
                     borderBottom: activeTab === tab.id ? '2px solid #f6c042' : '2px solid transparent',
                     color: activeTab === tab.id ? '#f6c042' : '#9ca3af',
-                    padding: '10px 16px',
-                    fontSize: '0.92rem',
                     fontWeight: activeTab === tab.id ? 700 : 500,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s'
                   }}
                 >
                   {tab.label}
@@ -463,23 +482,28 @@ export default function CouponDetailPage({
               background: '#0d1017',
               border: '1px solid rgba(255,255,255,0.08)',
               borderRadius: '12px',
-              padding: '24px',
-              lineHeight: 1.7
+              padding: 'clamp(16px, 3.5vw, 24px)',
+              lineHeight: 1.7,
+              wordBreak: 'break-word',
+              overflowWrap: 'break-word',
+              width: '100%',
+              maxWidth: '100%',
+              boxSizing: 'border-box'
             }}>
               {activeTab === 'overview' && (
                 <div>
-                  <h3 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <h3 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                     <Sparkles size={18} color="#f6c042" />
                     About This Festive Opportunity
                   </h3>
-                  <p style={{ color: '#d1d5db', fontSize: '0.94rem', marginBottom: '20px' }}>
+                  <p style={{ color: '#d1d5db', fontSize: '0.94rem', marginBottom: '20px', lineHeight: 1.7, wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                     {coupon.description || 'Celebrate with 1ticket exclusive vouchers. This pass grants priority entitlement to booking discounts, festive draws, and exclusive gifts upon on-site verification.'}
                   </p>
 
                   <h4 style={{ fontSize: '0.95rem', color: '#f6c042', margin: '18px 0 10px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Key Highlights
                   </h4>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+                  <div className="coupon-highlights-grid">
                     <div style={{ background: '#11141e', padding: '12px 14px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f6c042', fontWeight: 600, fontSize: '0.85rem' }}>
                         <Award size={16} /> Official Certificate
@@ -560,7 +584,7 @@ export default function CouponDetailPage({
           {/* ========================================================= */}
           {/* RIGHT COLUMN: BUY WIDGET, PASS COUNT, ATTENDEES & RAZORPAY */}
           {/* ========================================================= */}
-          <div className="coupon-detail-sidebar" style={{ position: 'sticky', top: '140px' }}>
+          <div className="coupon-detail-sidebar" id="coupon-checkout-card" style={{ position: 'sticky', top: '140px' }}>
             <div style={{
               background: '#0d1017',
               border: '1px solid rgba(212, 175, 55, 0.45)',
@@ -626,8 +650,8 @@ export default function CouponDetailPage({
                     onClick={() => handlePassCountChange(passCount - 1)}
                     disabled={passCount <= 1}
                     style={{
-                      width: '32px',
-                      height: '32px',
+                      width: '36px',
+                      height: '36px',
                       borderRadius: '6px',
                       background: passCount <= 1 ? '#1a1e28' : '#222836',
                       color: passCount <= 1 ? '#555' : '#fff',
@@ -650,8 +674,8 @@ export default function CouponDetailPage({
                     onClick={() => handlePassCountChange(passCount + 1)}
                     disabled={passCount >= 10}
                     style={{
-                      width: '32px',
-                      height: '32px',
+                      width: '36px',
+                      height: '36px',
                       borderRadius: '6px',
                       background: passCount >= 10 ? '#1a1e28' : '#222836',
                       color: passCount >= 10 ? '#555' : '#fff',
@@ -794,7 +818,7 @@ export default function CouponDetailPage({
                             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#d1d5db', display: 'block', marginBottom: '8px' }}>
                               Guest Pass #{guestIndex + 1}
                             </span>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                            <div className="coupon-guest-grid">
                               <input
                                 type="text"
                                 placeholder={`Guest #${guestIndex + 1} Name *`}
@@ -896,23 +920,15 @@ export default function CouponDetailPage({
                 </button>
 
                 {/* Secure Trust Badges */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '14px',
-                  marginTop: '14px',
-                  fontSize: '0.72rem',
-                  color: '#9ca3af'
-                }}>
+                <div className="coupon-trust-badges">
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                     <Lock size={12} color="#22c55e" /> Razorpay 256-bit SSL
                   </span>
-                  <span>•</span>
+                  <span className="coupon-trust-dot">•</span>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                     <Mail size={12} color="#f6c042" /> QR Pass via Email
                   </span>
-                  <span>•</span>
+                  <span className="coupon-trust-dot">•</span>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
                     <ShieldCheck size={12} color="#22c55e" /> Instant Activation
                   </span>
@@ -922,6 +938,50 @@ export default function CouponDetailPage({
           </div>
 
         </div>
+      </div>
+
+      {/* Mobile Sticky Quick Booking Bar (< 960px) */}
+      <div className="coupon-mobile-sticky-bar">
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f6c042', display: 'inline-block', boxShadow: '0 0 8px rgba(246, 192, 66, 0.8)' }} />
+            <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#e5e7eb', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+              {coupon.event_date ? formatEventDate(coupon.event_date) : '18/10/2026'}
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
+            <span style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff' }}>
+              ₹{totalAmount.toLocaleString('en-IN')}
+            </span>
+            <span style={{ fontSize: '0.78rem', color: '#9ca3af', fontWeight: 500 }}>
+              {passCount > 1 ? `(${passCount} passes)` : 'onwards'}
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={scrollToCheckout}
+          style={{
+            padding: '11px 22px',
+            fontSize: '0.84rem',
+            fontWeight: 800,
+            letterSpacing: '0.04em',
+            borderRadius: '9999px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'linear-gradient(135deg, #f6c042 0%, #eab308 50%, #d97706 100%)',
+            color: '#000000',
+            border: 'none',
+            boxShadow: '0 4px 18px rgba(246, 192, 66, 0.45)',
+            cursor: 'pointer'
+          }}
+        >
+          <Ticket size={16} strokeWidth={2.4} />
+          <span>BOOK PASSES</span>
+          <ArrowRight size={16} strokeWidth={2.4} />
+        </button>
       </div>
     </div>
   );

@@ -1711,6 +1711,56 @@ export default function App() {
           onOpenLegal={(policyId) => setActiveLegalPolicy(policyId)}
         />
       )}
+
+      {/* Mobile Sticky Booking Bar (Only on Home Page, < 900px) */}
+      {activeTab === 'home' && !isSignInOpen && !activeTicketPass && !isMyTicketsOpen && (
+        <div className="home-mobile-sticky-bar">
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f6c042', display: 'inline-block', boxShadow: '0 0 8px rgba(246, 192, 66, 0.8)' }} />
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, color: '#e5e7eb', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                18/10/2026
+              </span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
+              <span style={{ fontSize: '1.35rem', fontWeight: 800, color: '#ffffff' }}>
+                ₹100
+              </span>
+              <span style={{ fontSize: '0.78rem', color: '#9ca3af', fontWeight: 500 }}>
+                onwards
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab('explore');
+              window.location.hash = '#explore';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            style={{
+              padding: '11px 22px',
+              fontSize: '0.84rem',
+              fontWeight: 800,
+              letterSpacing: '0.04em',
+              borderRadius: '9999px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: 'linear-gradient(135deg, #f6c042 0%, #eab308 50%, #d97706 100%)',
+              color: '#000000',
+              border: 'none',
+              boxShadow: '0 4px 18px rgba(246, 192, 66, 0.45)',
+              cursor: 'pointer'
+            }}
+          >
+            <Ticket size={16} strokeWidth={2.4} />
+            <span>BOOK PASSES</span>
+            <ArrowRight size={16} strokeWidth={2.4} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

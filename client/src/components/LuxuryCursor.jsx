@@ -7,13 +7,21 @@ export default function LuxuryCursor() {
   const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
-    // Disable on touch devices
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-      setIsTouch(true);
-      return;
-    }
+    // Disable on touch devices or mobile viewports
+    const checkTouch = () => {
+      const isTouchDevice =
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+        window.innerWidth <= 768;
+      setIsTouch(isTouchDevice);
+    };
+
+    checkTouch();
+    window.addEventListener('resize', checkTouch);
 
     const handleMouseMove = (e) => {
+      if (window.innerWidth <= 768) return;
       setMousePosition({ x: e.clientX, y: e.clientY });
 
       // Check if hovering interactive element
@@ -25,7 +33,10 @@ export default function LuxuryCursor() {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', checkTouch);
+    };
   }, []);
 
   if (isTouch) return null;
@@ -34,6 +45,7 @@ export default function LuxuryCursor() {
     <>
       {/* Small crisp gold dot */}
       <motion.div
+        className="luxury-cursor-element"
         animate={{
           x: mousePosition.x - (isPointer ? 6 : 4),
           y: mousePosition.y - (isPointer ? 6 : 4),
@@ -56,6 +68,7 @@ export default function LuxuryCursor() {
 
       {/* Trailing soft gold ring glow */}
       <motion.div
+        className="luxury-cursor-element"
         animate={{
           x: mousePosition.x - (isPointer ? 22 : 16),
           y: mousePosition.y - (isPointer ? 22 : 16),
