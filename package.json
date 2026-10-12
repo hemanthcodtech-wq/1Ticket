@@ -1,0 +1,14 @@
+{
+  "name": "1ticket",
+  "version": "1.0.0",
+  "description": "1ticket - Modern Event Ticketing Platform with React, Express and Neon PostgreSQL",
+  "scripts": {
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "dev": "concurrently -n \"API,WEB\" -c \"magenta,cyan\" \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

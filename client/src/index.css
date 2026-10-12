@@ -1,0 +1,823 @@
+:root {
+  --bg-primary: #060709;
+  --bg-secondary: #0d0f14;
+  --bg-card: #0c0e14;
+  --bg-card-surface: #10131c;
+  --border-gold: rgba(212, 175, 55, 0.28);
+  --border-gold-glow: rgba(245, 184, 52, 0.45);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --gold-primary: #f6c042;
+  --gold-light: #fde68a;
+  --gold-dark: #b48316;
+  --gold-accent: #eab308;
+  --red-festive: #991b1b;
+  --red-festive-gradient: linear-gradient(135deg, #b91c1c, #7f1d1d);
+
+  --text-main: #fbfbfb;
+  --text-gold: #f6c042;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  --gold-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+  --gold-glow: 0 0 20px rgba(246, 192, 66, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 10% 25%, rgba(185, 28, 28, 0.07) 0%, transparent 45%),
+    radial-gradient(circle at 90% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+    linear-gradient(to bottom, #060709, #090a0f, #050608);
+  background-attachment: fixed;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+input, select {
+  font-family: var(--font-sans);
+  outline: none;
+}
+
+/* Gold Gradient Heading */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #fef08a 35%, #f6c042 70%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-shimmer-text {
+  background: linear-gradient(90deg, #f6c042 0%, #ffffff 50%, #f6c042 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Coupon Card Frame */
+.coupon-card {
+  background: #0d0f15;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.28s ease;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.coupon-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(246, 192, 66, 0.7);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(246, 192, 66, 0.15);
+}
+
+/* 3-column coupons layout */
+.coupons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .coupons-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .coupons-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* Ribbon Badge */
+.ribbon-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #b91c1c 0%, #881337 100%);
+  border: 1px solid rgba(254, 202, 202, 0.3);
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 5;
+}
+
+/* Price Box */
+.coupon-price-box {
+  background: rgba(18, 22, 32, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0 10px;
+}
+
+/* Golden Pill Button */
+.btn-gold {
+  background: linear-gradient(135deg, #f6c042 0%, #eab308 50%, #ca8a04 100%);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.25);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #fde047 0%, #f6c042 50%, #eab308 100%);
+  box-shadow: 0 6px 18px rgba(234, 179, 8, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-gold-outline {
+  background: transparent;
+  color: #f6c042;
+  border: 1px solid rgba(246, 192, 66, 0.6);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-gold-outline:hover {
+  background: rgba(246, 192, 66, 0.12);
+  border-color: #f6c042;
+  color: #ffffff;
+}
+
+/* Modal Backdrop */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  background: #0e1118;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.15);
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Pulse indicator */
+.pulse-indicator {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 0.9s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #08090c;
+}
+::-webkit-scrollbar-thumb {
+  background: #232733;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #393f54;
+}
+
+/* ==========================================================
+   LIVE CAMERA SCANNER FIX & VIDEO VIEWPORT
+   ========================================================== */
+#interactive-camera-qr-reader {
+  width: 100% !important;
+  min-height: 320px !important;
+  background: #000000 !important;
+  position: relative !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+#interactive-camera-qr-reader video {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 320px !important;
+  max-height: 480px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  display: block !important;
+  background: #000000 !important;
+}
+
+#interactive-camera-qr-reader canvas {
+  max-width: 100% !important;
+  border-radius: 10px !important;
+}
+
+#interactive-camera-qr-reader #qr-shaded-region {
+  border-color: rgba(246, 192, 66, 0.7) !important;
+}
+
+#interactive-camera-qr-reader img[alt="Info icon"] {
+  display: none !important;
+}
+
+/* ==========================================================
+   PREMIUM SKELETON LOADING SHIMMER ANIMATION
+   ========================================================== */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(212, 175, 55, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton-box {
+  background: #11141c;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(246, 192, 66, 0.06) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ==========================================================
+   OVERVIEW & STORY SECTION (REFERENCE LAYOUT)
+   ========================================================== */
+.story-grid-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 420px);
+  gap: 28px;
+  align-items: start;
+}
+
+.story-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0 20px;
+}
+
+@media (max-width: 1024px) {
+  .story-grid-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .story-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* ==========================================================
+   MOBILE RESPONSIVENESS & MULTI-DEVICE COMPATIBILITY
+   ========================================================== */
+
+/* Scanner Page Grid */
+.scanner-page-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.scanner-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.scanner-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.scanner-manual-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 880px) {
+  .scanner-main-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .scanner-controls-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .scanner-controls-header > div:first-child {
+    justify-content: flex-start;
+  }
+
+  .scanner-controls-header > div:last-child {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .scanner-controls-header button {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 12px !important;
+  }
+
+  .scanner-manual-input-row {
+    flex-direction: column;
+  }
+
+  .scanner-manual-input-row button {
+    width: 100%;
+  }
+}
+
+/* Admin Dashboard Mobile Drawer & Responsiveness */
+.admin-mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(246, 192, 66, 0.3);
+  color: #f6c042;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-mobile-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .admin-mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .admin-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    z-index: 999 !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.9) !important;
+    width: 280px !important;
+  }
+
+  .admin-sidebar.mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  .admin-mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+  }
+}
+
+/* ==========================================================
+   GLOBAL RESPONSIVENESS & ZERO-OVERFLOW SAFEGUARDS
+   ========================================================== */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   NAVBAR RESPONSIVE NAVIGATION
+   ========================================================== */
+.navbar-desktop-nav {
+  display: flex !important;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-desktop-staff-btn {
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.navbar-mobile-toggle {
+  display: none !important;
+}
+
+.navbar-mobile-drawer {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .navbar-desktop-nav {
+    display: none !important;
+  }
+
+  .navbar-desktop-staff-btn {
+    display: none !important;
+  }
+
+  .navbar-mobile-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-mobile-drawer {
+    display: block !important;
+  }
+}
+
+/* ==========================================================
+   HERO SEARCH BAR & FLOATING ELEMENTS RESPONSIVENESS
+   ========================================================== */
+.hero-floating-ticket {
+  display: block;
+}
+
+.hero-festive-badge-container {
+  display: flex !important;
+}
+
+.hero-mobile-festive-badge {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .hero-floating-ticket {
+    display: none !important;
+  }
+
+  .hero-festive-badge-container {
+    display: none !important;
+  }
+
+  .hero-mobile-festive-badge {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(153, 27, 27, 0.95) 0%, rgba(76, 5, 25, 0.95) 100%);
+    border: 1px solid rgba(246, 192, 66, 0.7);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: var(--font-cinzel, 'Cinzel', serif);
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #fde68a;
+    letter-spacing: 0.08em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 15px rgba(246, 192, 66, 0.25);
+    margin-bottom: 12px;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-search-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    border-radius: 16px !important;
+    padding: 14px !important;
+    gap: 10px !important;
+    background: rgba(12, 14, 20, 0.96) !important;
+    border: 1px solid rgba(212, 175, 55, 0.4) !important;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85) !important;
+  }
+
+  .hero-search-input-group,
+  .hero-search-select-group {
+    width: 100% !important;
+    min-width: 100% !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    border-radius: 10px !important;
+    padding: 11px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .hero-search-input-group:focus-within,
+  .hero-search-select-group:focus-within {
+    border-color: #f6c042 !important;
+    background: rgba(246, 192, 66, 0.06) !important;
+    box-shadow: 0 0 12px rgba(246, 192, 66, 0.2) !important;
+  }
+
+  .hero-search-input-group input,
+  .hero-search-select-group select {
+    width: 100% !important;
+    color: #ffffff !important;
+    font-size: 0.88rem !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+  }
+
+  .hero-search-divider {
+    display: none !important;
+  }
+
+  .hero-search-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 13px 20px !important;
+    border-radius: 10px !important;
+    font-size: 0.94rem !important;
+    font-weight: 700 !important;
+    margin-top: 4px !important;
+    box-shadow: 0 4px 18px rgba(246, 192, 66, 0.35) !important;
+  }
+}
+
+/* ==========================================================
+   COUPON DETAIL PAGE 2-COLUMN RESPONSIVE REFLOW
+   ========================================================== */
+.coupon-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 420px);
+  gap: 36px;
+  align-items: start;
+}
+
+.coupon-detail-tabs {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.coupon-detail-tabs::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+@media (max-width: 960px) {
+  .coupon-detail-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .coupon-detail-sidebar {
+    position: static !important;
+    top: auto !important;
+  }
+}
+
+/* ==========================================================
+   MODAL DIALOG RESPONSIVENESS (MOBILE PHONE SAFEGUARD)
+   ========================================================== */
+@media (max-width: 540px) {
+  .modal-overlay {
+    padding: 10px !important;
+    align-items: flex-end; /* Sheet style on mobile */
+  }
+
+  .modal-content {
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 92vh !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+/* Category pills horizontal scroll on ultra-narrow screens */
+@media (max-width: 480px) {
+  .filter-pill-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+}
+
+/* Section heading clean wrap on mobile */
+@media (max-width: 640px) {
+  .section-heading-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .heading-accent-line {
+    display: none !important;
+  }
+}
+
+/* ==========================================================
+   FIXED TOP NAVBAR STYLES & OVERRIDES
+   ========================================================== */
+header.navbar-fixed-header,
+.navbar-fixed-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+}
+
+.navbar-spacer {
+  height: 68px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 860px) {
+  header.navbar-fixed-header,
+  .navbar-fixed-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+  }
+
+  .navbar-spacer {
+    height: 62px;
+  }
+}
+
+/* ==========================================================
+   UNIVERSAL COUPON REUSABLE CARD ANIMATIONS & STYLES
+   ========================================================== */
+.universal-coupon-wrapper {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.universal-coupon-wrapper:hover {
+  transform: translateY(-6px) scale(1.015);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .universal-coupon-wrapper:hover {
+    transform: none !important;
+  }
+}
+
+/* ==========================================================
+   TYPEWRITER HEADER & CURSOR ANIMATION
+   ========================================================== */
+@keyframes typewriterBlink {
+  0%, 100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scaleY(0.85);
+  }
+}
+
+.typewriter-cursor {
+  animation: typewriterBlink 0.85s ease-in-out infinite;
+}
+
+

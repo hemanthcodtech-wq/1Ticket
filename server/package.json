@@ -1,0 +1,25 @@
+{
+  "name": "1ticket-server",
+  "version": "1.0.0",
+  "description": "Express backend with Neon PostgreSQL for 1ticket",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^10.1.0",
+    "nodemon": "^3.1.14",
+    "razorpay": "^2.9.8"
+  }
+}
