@@ -14,6 +14,7 @@ import {
   Check,
   SwitchCamera
 } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 export default function CameraScannerPage({ bookings = [], token, onScanSuccess }) {
   const [manualCode, setManualCode] = useState('');
@@ -291,7 +292,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
     try {
       setVerifyLoading(true);
 
-      const res = await fetch('/api/tickets/verify-scan', {
+      const res = await fetch(getApiUrl('/api/tickets/verify-scan'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

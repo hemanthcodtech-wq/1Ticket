@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Plus, Calendar, MapPin, DollarSign, Users, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 const CATEGORIES = ['Music', 'Tech', 'Orchestra', 'Food & Drink', 'Gaming', 'Conference'];
 
@@ -35,7 +36,7 @@ export default function CreateEventModal({ onClose, onEventCreated }) {
 
     try {
       setIsSubmitting(true);
-      const res = await fetch('/api/events', {
+      const res = await fetch(getApiUrl('/api/events'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

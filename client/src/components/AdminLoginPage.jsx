@@ -13,6 +13,7 @@ import {
   Ticket,
   Loader2
 } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 export default function AdminLoginPage({ onLoginSuccess, onBackToHome }) {
   const [email, setEmail] = useState('admin@1ticket.com');
@@ -40,7 +41,7 @@ export default function AdminLoginPage({ onLoginSuccess, onBackToHome }) {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(getApiUrl('/api/auth/login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

@@ -18,6 +18,7 @@ import AdminDashboard from './components/AdminDashboard';
 import CouponDetailPage from './components/CouponDetailPage';
 import ExploreCouponsPage from './components/ExploreCouponsPage';
 import TypewriterHeader from './components/TypewriterHeader';
+import { getApiUrl } from './config/api';
 import {
   Search,
   ShieldCheck,
@@ -142,7 +143,7 @@ export default function App() {
   // Fetch initial data
   const fetchDbStatus = async () => {
     try {
-      const res = await fetch('/api/health');
+      const res = await fetch(getApiUrl('/api/health'));
       const data = await res.json();
       setDbStatus(data.database);
     } catch (err) {
@@ -154,7 +155,7 @@ export default function App() {
   const fetchCoupons = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/events');
+      const res = await fetch(getApiUrl('/api/events'));
       const data = await res.json();
       if (data.success) {
         setCoupons(data.data);
@@ -177,7 +178,7 @@ export default function App() {
 
   const fetchBookings = async () => {
     try {
-      const res = await fetch('/api/bookings');
+      const res = await fetch(getApiUrl('/api/bookings'));
       const data = await res.json();
       if (data.success) {
         setBookings(data.data);

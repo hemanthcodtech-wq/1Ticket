@@ -11,8 +11,11 @@ build/
 .env
 .env.local
 .env.*.local
-server/.env
+.env.production
+server/.env*
+!client/.env.production
 client/.env
+client/.env.local
 
 # Logs
 npm-debug.log*

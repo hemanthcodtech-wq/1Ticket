@@ -31,6 +31,7 @@ import {
   CoordinatorsManagementSkeleton,
   CameraScannerSkeleton
 } from './Skeletons';
+import { getApiUrl } from '../config/api';
 
 export default function AdminDashboard({ user, token, onLogout, onReturnHome }) {
   // Page routing inside admin portal: 'revenue' | 'coupons' | 'bookings' | 'scanner' | 'coordinators' | 'verified-roster'
@@ -88,7 +89,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
 
       // Load analytics stats
       try {
-        const resStats = await fetch('/api/reports/analytics', {
+        const resStats = await fetch(getApiUrl('/api/reports/analytics'), {
           headers: { Authorization: `Bearer ${token}` }
         });
         const dStats = await resStats.json();
@@ -99,7 +100,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
 
       // Load coupons
       try {
-        const resCoupons = await fetch('/api/events');
+        const resCoupons = await fetch(getApiUrl('/api/events'));
         const dCoupons = await resCoupons.json();
         if (dCoupons.success) setCoupons(dCoupons.data);
       } catch (e) {
@@ -108,7 +109,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
 
       // Load bookings
       try {
-        const resBookings = await fetch('/api/bookings', {
+        const resBookings = await fetch(getApiUrl('/api/bookings'), {
           headers: { Authorization: `Bearer ${token}` }
         });
         const dBookings = await resBookings.json();
@@ -120,7 +121,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
       // Load coordinators if admin
       if (user.role === 'admin') {
         try {
-          const resCoords = await fetch('/api/coordinators', {
+          const resCoords = await fetch(getApiUrl('/api/coordinators'), {
             headers: { Authorization: `Bearer ${token}` }
           });
           const dCoords = await resCoords.json();
@@ -141,7 +142,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
   // Handlers for Coupon Create & Delete
   const handleCreateCoupon = async (couponData) => {
     try {
-      const res = await fetch('/api/events', {
+      const res = await fetch(getApiUrl('/api/events'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -163,7 +164,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
 
   const handleUpdateCoupon = async (id, updatedData) => {
     try {
-      const res = await fetch(`/api/events/${id}`, {
+      const res = await fetch(getApiUrl(`/api/events/${id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -189,7 +190,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
   const handleDeleteCoupon = async (id) => {
     if (!window.confirm('Are you sure you want to delete this coupon?')) return;
     try {
-      const res = await fetch(`/api/events/${id}`, {
+      const res = await fetch(getApiUrl(`/api/events/${id}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -208,7 +209,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
   // Handlers for Coordinator Create & Delete
   const handleCreateCoordinator = async (coordData) => {
     try {
-      const res = await fetch('/api/coordinators', {
+      const res = await fetch(getApiUrl('/api/coordinators'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -231,7 +232,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
   const handleDeleteCoordinator = async (id) => {
     if (!window.confirm('Are you sure you want to remove this coordinator?')) return;
     try {
-      const res = await fetch(`/api/coordinators/${id}`, {
+      const res = await fetch(getApiUrl(`/api/coordinators/${id}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });

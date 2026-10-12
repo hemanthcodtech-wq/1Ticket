@@ -15,6 +15,7 @@ import {
   ExternalLink,
   ChevronRight
 } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, onRefresh }) {
   // Always require email and mobile number verification first before displaying passes
@@ -50,7 +51,7 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
     try {
       setLoading(true);
       // Query backend for this customer's passes with strict email and phone match
-      const url = `/api/bookings?email=${encodeURIComponent(emailTrim)}&phone=${encodeURIComponent(phoneTrim)}`;
+      const url = getApiUrl(`/api/bookings?email=${encodeURIComponent(emailTrim)}&phone=${encodeURIComponent(phoneTrim)}`);
       const res = await fetch(url);
       const data = await res.json();
 

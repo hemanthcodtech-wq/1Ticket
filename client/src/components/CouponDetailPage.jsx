@@ -25,6 +25,7 @@ import {
   Loader2
 } from 'lucide-react';
 import TypewriterHeader from './TypewriterHeader';
+import { getApiUrl } from '../config/api';
 
 export default function CouponDetailPage({
   coupon,
@@ -148,7 +149,7 @@ export default function CouponDetailPage({
       setLoading(true);
 
       // 1. Fetch Razorpay Order from server
-      const orderRes = await fetch('/api/payment/create-order', {
+      const orderRes = await fetch(getApiUrl('/api/payment/create-order'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -167,7 +168,7 @@ export default function CouponDetailPage({
       // Function to finalize booking on the backend AFTER payment verification
       const finalizeBooking = async (paymentId, razorpayOrderId) => {
         try {
-          const bookingRes = await fetch('/api/bookings', {
+          const bookingRes = await fetch(getApiUrl('/api/bookings'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

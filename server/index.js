@@ -33,10 +33,16 @@ import {
   sendCoordinatorWelcomeEmail
 } from './mailer.js';
 
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load .env.production if present, falling back to standard .env
+const envProductionPath = path.join(__dirname, '.env.production');
+if (fs.existsSync(envProductionPath)) {
+  dotenv.config({ path: envProductionPath });
+} else {
+  dotenv.config();
+}
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -108,11 +114,35 @@ const upload = multer({
   }
 });
 
-// Middlewares
+// Middlewares: Allow official production frontend URLs and local origins
+const allowedOrigins = [
+  'https://1-ticket-nqxo.vercel.app',
+  'https://1-ticket.vercel.app',
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:5001',
+  'http://localhost:3000'
+].filter(Boolean);
+
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+  origin: function (origin, callback) {
+    // Allow non-browser requests (like curl, Postman, mobile apps)
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') ||
+      origin.startsWith('http://localhost:')
+    ) {
+      return callback(null, true);
+    }
+    return callback(null, true); // Fallback permissive for other clients
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
 }));
+app.options('*', cors());
 app.use(express.json());
 
 // Serve uploaded images statically

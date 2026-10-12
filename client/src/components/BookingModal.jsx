@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Sparkles, CheckCircle, ShieldCheck, Ticket, User, Mail, Phone, Calendar, MapPin, Database } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 export default function BookingModal({ coupon, onClose, onSuccess }) {
   const [customerName, setCustomerName] = useState('');
@@ -30,7 +31,7 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
       setLoading(true);
       setError(null);
 
-      const res = await fetch('/api/bookings', {
+      const res = await fetch(getApiUrl('/api/bookings'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

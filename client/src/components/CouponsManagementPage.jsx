@@ -18,6 +18,7 @@ import {
   Filter,
   Loader2
 } from 'lucide-react';
+import { getApiUrl } from '../config/api';
 
 export default function CouponsManagementPage({
   coupons = [],
@@ -111,7 +112,7 @@ export default function CouponsManagementPage({
       const data = new FormData();
       data.append('image', file);
 
-      const res = await fetch('/api/upload', {
+      const res = await fetch(getApiUrl('/api/upload'), {
         method: 'POST',
         body: data
       });
