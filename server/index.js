@@ -124,6 +124,19 @@ if (fs.existsSync(clientCouponsDir)) {
   app.use('/coupons', express.static(clientCouponsDir));
 }
 
+// Ensure Database is initialized on serverless requests
+let dbInitPromise = null;
+app.use(async (req, res, next) => {
+  if (!dbInitPromise) {
+    dbInitPromise = initDb().catch((err) => {
+      console.error('Database initialization warning:', err);
+      dbInitPromise = null; // Retry on next request if failed
+    });
+  }
+  await dbInitPromise;
+  next();
+});
+
 // Request logger
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} [${req.method}] ${req.url}`);
@@ -638,9 +651,13 @@ app.get('/api/reports/analytics', authenticateToken, async (req, res) => {
   }
 });
 
-// Start Server
-app.listen(PORT, async () => {
-  console.log(`🚀 1ticket backend running on http://localhost:${PORT}`);
-  await initDb();
-  console.log(`⚡ Neon DB Status: ${getDbStatus().mode}`);
-});
+// Start Server (only when not running under Vercel serverless runtime)
+if (!process.env.VERCEL) {
+  app.listen(PORT, async () => {
+    console.log(`🚀 1ticket backend running on http://localhost:${PORT}`);
+    await initDb();
+    console.log(`⚡ Neon DB Status: ${getDbStatus().mode}`);
+  });
+}
+
+export default app;
