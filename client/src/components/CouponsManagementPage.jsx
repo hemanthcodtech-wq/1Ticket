@@ -593,7 +593,7 @@ export default function CouponsManagementPage({
                     )}
 
                     <span style={{ display: 'block', fontSize: '0.72rem', color: '#9ca3af', marginTop: '6px' }}>
-                      Supports PNG, JPG, WEBP. Uploads directly to Cloudinary CDN via Multer storage.
+                      Recommended: <strong>16:9 or 2:1 ratio (1200 × 675 px or 800 × 450 px)</strong> • Max file size: <strong>10 MB</strong> (PNG, JPG, WEBP). Auto-adjusts cleanly across customer cards.
                     </span>
                   </div>
                 </div>

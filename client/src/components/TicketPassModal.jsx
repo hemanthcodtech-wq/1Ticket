@@ -143,8 +143,39 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
               </span>
             </div>
 
+            {/* Pass Hero Image if available (Auto-adjusted to voucher card) */}
+            {booking.image_url && (
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '140px',
+                  overflow: 'hidden',
+                  background: '#090b10'
+                }}
+              >
+                <img
+                  src={booking.image_url}
+                  alt={booking.event_title || 'Pass Preview'}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center'
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, #12151f 0%, rgba(18, 21, 31, 0.4) 60%, transparent 100%)'
+                  }}
+                />
+              </div>
+            )}
+
             {/* Voucher Body */}
-            <div style={{ padding: '20px 18px 16px' }}>
+            <div style={{ padding: '18px 18px 16px' }}>
               <h3 style={{ fontSize: '1.2rem', color: '#ffffff', margin: '0 0 6px', lineHeight: 1.25, fontWeight: 800, fontFamily: 'var(--font-serif)' }}>
                 {booking.event_title || 'Exclusive Pass Offer'}
               </h3>

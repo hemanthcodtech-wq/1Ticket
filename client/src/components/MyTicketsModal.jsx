@@ -402,20 +402,38 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                        <div style={{
-                          width: '46px',
-                          height: '46px',
-                          borderRadius: '10px',
-                          background: 'rgba(246, 192, 66, 0.12)',
-                          border: '1px solid rgba(246, 192, 66, 0.3)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#f6c042',
-                          flexShrink: 0
-                        }}>
-                          <QrCode size={24} />
-                        </div>
+                        {item.image_url ? (
+                          <div style={{
+                            width: '48px',
+                            height: '48px',
+                            borderRadius: '10px',
+                            overflow: 'hidden',
+                            border: '1px solid rgba(246, 192, 66, 0.35)',
+                            flexShrink: 0,
+                            background: '#090b10'
+                          }}>
+                            <img
+                              src={item.image_url}
+                              alt={item.event_title}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          </div>
+                        ) : (
+                          <div style={{
+                            width: '46px',
+                            height: '46px',
+                            borderRadius: '10px',
+                            background: 'rgba(246, 192, 66, 0.12)',
+                            border: '1px solid rgba(246, 192, 66, 0.3)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#f6c042',
+                            flexShrink: 0
+                          }}>
+                            <QrCode size={24} />
+                          </div>
+                        )}
                         <div>
                           <h4 style={{ fontSize: '0.98rem', color: '#ffffff', margin: '0 0 4px', fontWeight: 700 }}>
                             {item.event_title}

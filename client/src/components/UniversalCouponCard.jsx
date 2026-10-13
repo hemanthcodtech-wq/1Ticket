@@ -178,45 +178,73 @@ export default function UniversalCouponCard({
           )}
         </div>
 
-        {/* Thumbnail Image (16:9) */}
+        {/* Thumbnail Image (Auto-adjusting to Card Header) */}
         {coupon?.image_url && (
           <div
             style={{
               position: 'relative',
               width: '100%',
-              paddingTop: '50%',
+              height: '190px',
               overflow: 'hidden',
-              background: '#090a0f'
+              background: '#090a0f',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
+            {/* Ambient Blurred Backdrop to smoothly fill any letterbox gap */}
             <img
               src={coupon.image_url}
-              alt={coupon.title}
+              alt=""
+              aria-hidden="true"
               style={{
                 position: 'absolute',
                 inset: 0,
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                transform: isHovered ? 'scale(1.04)' : 'scale(1)',
+                filter: 'blur(16px) brightness(0.4)',
+                transform: 'scale(1.15)',
+                pointerEvents: 'none'
+              }}
+            />
+
+            {/* Foreground Main Image (auto adjusts cleanly to card aspect ratio) */}
+            <img
+              src={coupon.image_url}
+              alt={coupon.title}
+              style={{
+                position: 'relative',
+                zIndex: 1,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center',
+                transform: isHovered ? 'scale(1.03)' : 'scale(1)',
                 transition: 'transform 0.4s ease'
               }}
             />
+
+            {/* Subtle Gradient Overlays for Card Text Legibility */}
             <div
               style={{
                 position: 'absolute',
                 inset: 0,
+                zIndex: 2,
                 background: isBlack
-                  ? 'linear-gradient(to top, rgba(16, 19, 26, 0.92) 0%, transparent 60%)'
-                  : 'linear-gradient(to top, rgba(244, 237, 226, 0.88) 0%, transparent 60%)'
+                  ? 'linear-gradient(to top, rgba(16, 19, 26, 0.95) 0%, rgba(16, 19, 26, 0.2) 40%, transparent 100%)'
+                  : 'linear-gradient(to top, rgba(244, 237, 226, 0.92) 0%, rgba(244, 237, 226, 0.2) 40%, transparent 100%)',
+                pointerEvents: 'none'
               }}
             />
+
             {coupon?.category && (
               <span
                 style={{
                   position: 'absolute',
                   bottom: '10px',
                   left: '16px',
+                  zIndex: 3,
                   fontSize: '0.7rem',
                   fontWeight: 700,
                   textTransform: 'uppercase',
@@ -225,7 +253,8 @@ export default function UniversalCouponCard({
                   background: 'rgba(0, 0, 0, 0.75)',
                   padding: '3px 8px',
                   borderRadius: '4px',
-                  backdropFilter: 'blur(4px)'
+                  backdropFilter: 'blur(4px)',
+                  border: '1px solid rgba(212, 175, 55, 0.25)'
                 }}
               >
                 {coupon.category}
