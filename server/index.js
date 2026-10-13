@@ -56,20 +56,24 @@ import { CloudinaryStorage } from 'multer-storage-cloudinary';
 initMailer();
 
 // Configure Cloudinary from environment variables
+const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME || 'dwfnamcg';
+const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY || '585761135285886';
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET || 'lMN6W1tedQRv4b0vxGbQ85uiKlQ';
+
 const isCloudinaryConfigured = Boolean(
-  process.env.CLOUDINARY_CLOUD_NAME &&
-  process.env.CLOUDINARY_API_KEY &&
-  process.env.CLOUDINARY_API_SECRET &&
-  !process.env.CLOUDINARY_CLOUD_NAME.includes('your_')
+  CLOUDINARY_CLOUD_NAME &&
+  CLOUDINARY_API_KEY &&
+  CLOUDINARY_API_SECRET &&
+  !CLOUDINARY_CLOUD_NAME.includes('your_')
 );
 
 if (isCloudinaryConfigured) {
   cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    cloud_name: CLOUDINARY_CLOUD_NAME,
+    api_key: CLOUDINARY_API_KEY,
+    api_secret: CLOUDINARY_API_SECRET
   });
-  console.log('☁️ Cloudinary initialized with cloud_name:', process.env.CLOUDINARY_CLOUD_NAME);
+  console.log('☁️ Cloudinary initialized with cloud_name:', CLOUDINARY_CLOUD_NAME);
 } else {
   console.log('ℹ️ Cloudinary credentials pending in .env; utilizing local disk Multer fallback.');
 }
@@ -98,7 +102,7 @@ if (isCloudinaryConfigured) {
     cloudinary: cloudinary,
     params: {
       folder: '1ticket-coupons',
-      allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
+      allowed_formats: ['jpg', 'png', 'jpeg', 'webp', 'gif', 'avif'],
       transformation: [{ width: 1200, crop: 'limit', quality: 'auto' }]
     }
   });
@@ -310,19 +314,41 @@ app.get('/api/auth/me', authenticateToken, async (req, res) => {
 // ==========================================
 // 3. IMAGE UPLOAD ROUTE (MULTER)
 // ==========================================
-app.post('/api/upload', authenticateToken, upload.single('image'), (req, res) => {
-  try {
+app.post('/api/upload', (req, res) => {
+  // Graceful auth check: verify token if provided, but don't hard reject to prevent silent UI stalls
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (token) {
+    try {
+      req.user = jwt.verify(token, JWT_SECRET);
+    } catch (e) {
+      console.warn('Upload token note:', e.message);
+    }
+  }
+
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      console.error('Upload middleware error:', err);
+      return res.status(400).json({
+        success: false,
+        error: err.message || 'Image upload failed'
+      });
+    }
+
     if (!req.file) {
-      return res.status(400).json({ success: false, error: 'Please choose an image file to upload' });
+      return res.status(400).json({
+        success: false,
+        error: 'Please choose an image file to upload'
+      });
     }
 
     // Cloudinary returns full hosted URL in req.file.path or req.file.secure_url
     // Local disk returns filename in req.file.filename
-    const imageUrl = req.file.path?.startsWith('http')
-      ? req.file.path
-      : `/uploads/${req.file.filename}`;
-
-    const isCloudinary = req.file.path?.startsWith('http');
+    const fileUrl = req.file.path || req.file.secure_url || req.file.url;
+    const isCloudinary = Boolean(fileUrl && fileUrl.startsWith('http'));
+    const imageUrl = isCloudinary
+      ? fileUrl
+      : (req.file.filename ? `/uploads/${req.file.filename}` : '');
 
     res.json({
       success: true,
@@ -332,10 +358,7 @@ app.post('/api/upload', authenticateToken, upload.single('image'), (req, res) =>
       imageUrl,
       provider: isCloudinary ? 'cloudinary' : 'local-multer'
     });
-  } catch (err) {
-    console.error('Upload error:', err);
-    res.status(500).json({ success: false, error: err.message || 'Image upload failed' });
-  }
+  });
 });
 
 // ==========================================

@@ -26,7 +26,7 @@ export default function FAQPage() {
         {
           id: 1,
           q: '1. What is 1ticket?',
-          a: '1ticket is an online platform for discovering and purchasing eligible promotional coupons and offers, subject to the terms published for each campaign.'
+          a: '1ticket is an online platform for discovering and purchasing eligible promotional passes and offers, subject to the terms published for each campaign.'
         },
         {
           id: 2,
@@ -41,43 +41,43 @@ export default function FAQPage() {
       ]
     },
     {
-      category: 'Coupons and Purchases',
+      category: 'Passes and Purchases',
       icon: <Tag size={18} color="#f6c042" />,
       questions: [
         {
           id: 4,
-          q: '4. How can I purchase a coupon?',
+          q: '4. How can I purchase a pass?',
           a: 'Select an available offer, review its details, sign in or register if required, and follow the checkout process.'
         },
         {
           id: 5,
-          q: '5. How much does a coupon cost?',
+          q: '5. How much does a pass cost?',
           a: 'The price depends on the selected offer. The applicable price should be displayed on the offer page and confirmed at checkout before payment.'
         },
         {
           id: 6,
-          q: '6. Will I receive my coupon immediately?',
-          a: 'Coupons are made available after the order and payment have been verified, subject to the relevant offer\'s processing requirements.'
+          q: '6. Will I receive my pass immediately?',
+          a: 'Passes are made available after the order and payment have been verified, subject to the relevant offer\'s processing requirements.'
         },
         {
           id: 7,
-          q: '7. Where can I find my coupon?',
-          a: 'Sign in to your account and visit My Coupons or your order history, where supported.'
+          q: '7. Where can I find my pass?',
+          a: 'Sign in to your account and visit My Passes or your order history, where supported.'
         },
         {
           id: 8,
-          q: '8. Can I buy more than one coupon?',
+          q: '8. Can I buy more than one pass?',
           a: 'That depends on the offer. Purchase limits, duplicate purchases, and per-customer restrictions will be specified in the applicable campaign terms.'
         },
         {
           id: 9,
-          q: '9. Can I transfer my coupon to another person?',
-          a: 'Coupons are transferable only if the specific offer terms permit transfer. Contact support before attempting a transfer.'
+          q: '9. Can I transfer my pass to another person?',
+          a: 'Passes are transferable only if the specific offer terms permit transfer. Contact support before attempting a transfer.'
         },
         {
           id: 10,
-          q: '10. Can I use a coupon after its expiry date?',
-          a: 'Expired coupons cannot ordinarily be redeemed unless the offer terms or applicable law provide otherwise.'
+          q: '10. Can I use a pass after its expiry date?',
+          a: 'Expired passes cannot ordinarily be redeemed unless the offer terms or applicable law provide otherwise.'
         }
       ]
     },
@@ -87,7 +87,7 @@ export default function FAQPage() {
       questions: [
         {
           id: 11,
-          q: '11. Does buying a Lucky Dip Villa Coupon guarantee that I will win a villa?',
+          q: '11. Does buying a Lucky Dip Villa Pass guarantee that I will win a villa?',
           a: 'No, not unless the specific offer explicitly states that the purchase itself entitles you to the villa. For a draw-based campaign, participation and any prize entitlement depend on the published rules, eligibility, valid entry requirements, and applicable law.'
         },
         {
@@ -138,7 +138,7 @@ export default function FAQPage() {
         },
         {
           id: 20,
-          q: '20. Are coupon purchases refundable?',
+          q: '20. Are pass purchases refundable?',
           a: 'Refund eligibility depends on the specific offer, the published refund policy, the transaction status, and applicable law. No policy excludes rights that cannot legally be waived.'
         },
         {
@@ -170,7 +170,7 @@ export default function FAQPage() {
         {
           id: 25,
           q: '25. What should I do if I notice incorrect offer information?',
-          a: 'Contact support and provide the offer name, relevant screenshots, and any order or coupon reference. We will review the information.'
+          a: 'Contact support and provide the offer name, relevant screenshots, and any order or pass reference. We will review the information.'
         },
         {
           id: 26,
@@ -251,7 +251,7 @@ export default function FAQPage() {
         />
 
         <p style={{ color: '#9ca3af', fontSize: '1rem', lineHeight: 1.6, marginBottom: '28px' }}>
-          Find detailed answers to questions regarding coupons, promotional draws, booking benefits, payments, and account support on 1ticket.
+          Find detailed answers to questions regarding passes, promotional draws, booking benefits, payments, and account support on 1ticket.
         </p>
 
         {/* Search input */}
@@ -292,7 +292,7 @@ export default function FAQPage() {
         flexWrap: 'wrap',
         marginBottom: '36px'
       }}>
-        {['All', 'About 1ticket', 'Coupons and Purchases', 'Lucky Dip and Promotional Offers', 'Payments and Refunds', 'Accounts and Support'].map((cat) => (
+        {['All', 'About 1ticket', 'Passes and Purchases', 'Lucky Dip and Promotional Offers', 'Payments and Refunds', 'Accounts and Support'].map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
@@ -466,7 +466,7 @@ export default function FAQPage() {
               Still have questions about an offer?
             </h4>
             <p style={{ margin: 0, fontSize: '0.82rem', color: '#9ca3af' }}>
-              Our dedicated customer support team is available 24/7 to assist with coupon queries.
+              Our dedicated customer support team is available 24/7 to assist with pass queries.
             </p>
           </div>
         </div>

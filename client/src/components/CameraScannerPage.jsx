@@ -567,7 +567,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
                 </div>
 
                 <h3 style={{ fontSize: '1.25rem', color: '#ffffff', margin: '0 0 6px', fontWeight: 800 }}>
-                  {scanResult.valid ? 'Coupon Verified!' : 'Verification Failed'}
+                  {scanResult.valid ? 'Pass Verified!' : 'Verification Failed'}
                 </h3>
                 <p style={{
                   fontSize: '0.84rem',
@@ -592,7 +592,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
                 )}
 
                 <button
-                  onClick={handleScanAnother}
+                  onClick={handleScanNextImmediately}
                   className="btn-gold"
                   style={{
                     padding: '12px 24px',
@@ -604,7 +604,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
                   }}
                 >
                   <Camera size={18} />
-                  <span>Scan Another Coupon</span>
+                  <span>Scan Another Pass</span>
                 </button>
               </div>
             )}
@@ -872,7 +872,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
                     fontWeight: 800
                   }}>
                     {scanResult.valid
-                      ? (scanResult.alreadyRedeemed ? 'Pass Already Redeemed' : 'Valid Coupon Voucher Verified!')
+                      ? (scanResult.alreadyRedeemed ? 'Pass Already Redeemed' : 'Valid Pass Voucher Verified!')
                       : 'Invalid Voucher Code'}
                   </h4>
                   <span style={{ fontSize: '0.76rem', color: '#d1d5db' }}>
@@ -922,7 +922,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
               {/* Prompt to scan another coupon */}
               <div style={{ marginTop: '16px', display: 'flex', gap: '10px' }}>
                 <button
-                  onClick={handleScanAnother}
+                  onClick={handleScanNextImmediately}
                   className="btn-gold"
                   style={{
                     flex: 1,
@@ -936,7 +936,7 @@ export default function CameraScannerPage({ bookings = [], token, onScanSuccess 
                   }}
                 >
                   <Camera size={16} />
-                  <span>Scan Another Coupon</span>
+                  <span>Scan Another Pass</span>
                 </button>
               </div>
             </div>

@@ -11,9 +11,9 @@ let isNeonConnected = false;
 const SEED_EVENTS = [
   {
     id: 'coupon-1',
-    title: 'Lucky Dip Villa Coupon',
-    subtitle: 'Your chance to win a dream villa with a special lucky draw coupon.',
-    description: 'Enter the grand Durgashtami festive lucky dip! Secure your exclusive coupon for an opportunity to own a world-class luxury contemporary smart villa with private pool, landscaped gardens, and high-end interiors.',
+    title: 'Lucky Dip Villa Pass',
+    subtitle: 'Your chance to win a dream villa with a special lucky draw pass.',
+    description: 'Enter the grand Durgashtami festive lucky dip! Secure your exclusive pass for an opportunity to own a world-class luxury contemporary smart villa with private pool, landscaped gardens, and high-end interiors.',
     badge: 'DURGASHTAMI SPECIAL',
     category: 'Villas',
     offer_type: 'Lucky Draw',
@@ -417,13 +417,17 @@ export async function createEvent(eventData) {
   const newEv = {
     id,
     title: eventData.title,
+    subtitle: eventData.subtitle || null,
     description: eventData.description,
-    category: eventData.category || 'Music',
+    category: eventData.category || 'Villas',
+    offer_type: eventData.offer_type || 'Lucky Draw',
+    badge: eventData.badge || 'SPECIAL OFFER',
     venue: eventData.venue,
     location: eventData.location,
     event_date: eventData.event_date,
     event_time: eventData.event_time || '18:00',
     price: Number(eventData.price) || 0,
+    original_price: Number(eventData.original_price) || 0,
     total_seats: Number(eventData.total_seats) || 100,
     available_seats: Number(eventData.total_seats) || 100,
     image_url: eventData.image_url || 'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=80',
@@ -431,12 +435,22 @@ export async function createEvent(eventData) {
   };
 
   if (isNeonConnected && sql) {
-    const result = await sql`
-      INSERT INTO events (id, title, description, category, venue, location, event_date, event_time, price, total_seats, available_seats, image_url, tags)
-      VALUES (${newEv.id}, ${newEv.title}, ${newEv.description}, ${newEv.category}, ${newEv.venue}, ${newEv.location}, ${newEv.event_date}, ${newEv.event_time}, ${newEv.price}, ${newEv.total_seats}, ${newEv.available_seats}, ${newEv.image_url}, ${newEv.tags})
-      RETURNING *
-    `;
-    return result[0];
+    try {
+      const result = await sql`
+        INSERT INTO events (id, title, subtitle, description, category, offer_type, badge, venue, location, event_date, event_time, price, original_price, total_seats, available_seats, image_url, tags)
+        VALUES (${newEv.id}, ${newEv.title}, ${newEv.subtitle}, ${newEv.description}, ${newEv.category}, ${newEv.offer_type}, ${newEv.badge}, ${newEv.venue}, ${newEv.location}, ${newEv.event_date}, ${newEv.event_time}, ${newEv.price}, ${newEv.original_price}, ${newEv.total_seats}, ${newEv.available_seats}, ${newEv.image_url}, ${newEv.tags})
+        RETURNING *
+      `;
+      return result[0];
+    } catch (colErr) {
+      console.warn('Insert fallback with base columns:', colErr.message);
+      const result = await sql`
+        INSERT INTO events (id, title, description, category, venue, location, event_date, event_time, price, total_seats, available_seats, image_url, tags)
+        VALUES (${newEv.id}, ${newEv.title}, ${newEv.description}, ${newEv.category}, ${newEv.venue}, ${newEv.location}, ${newEv.event_date}, ${newEv.event_time}, ${newEv.price}, ${newEv.total_seats}, ${newEv.available_seats}, ${newEv.image_url}, ${newEv.tags})
+        RETURNING *
+      `;
+      return result[0];
+    }
   } else {
     memoryEvents.unshift(newEv);
     return newEv;

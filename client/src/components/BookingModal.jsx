@@ -23,7 +23,7 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
       return;
     }
     if (!customerPhone || cleanPhone.length < 10) {
-      setError('Please provide a valid 10-digit mobile number for coupon pass verification.');
+      setError('Please provide a valid 10-digit mobile number for pass verification.');
       return;
     }
 
@@ -51,11 +51,11 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
         localStorage.setItem('1ticket_customer_phone', cleanPhone);
         onSuccess(data.data);
       } else {
-        setError(data.error || 'Failed to claim coupon.');
+        setError(data.error || 'Failed to claim pass.');
       }
     } catch (err) {
-      console.error('Error claiming coupon:', err);
-      setError('Network error while processing coupon. Please check connection.');
+      console.error('Error claiming pass:', err);
+      setError('Network error while processing pass. Please check connection.');
     } finally {
       setLoading(false);
     }
@@ -87,7 +87,7 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
               <Ticket size={18} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.25rem', margin: 0, color: '#ffffff' }}>Claim Exclusive Coupon</h2>
+              <h2 style={{ fontSize: '1.25rem', margin: 0, color: '#ffffff' }}>Claim Exclusive Pass</h2>
               <p style={{ margin: 0, fontSize: '0.78rem', color: '#9ca3af' }}>Verified by 1ticket Guaranteed Trust</p>
             </div>
           </div>
@@ -197,7 +197,7 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
 
             <div>
               <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#d1d5db', marginBottom: '6px' }}>
-                Email Address * (For Coupon Voucher Code)
+                Email Address * (For Pass Voucher Code)
               </label>
               <div style={{ position: 'relative' }}>
                 <Mail size={16} color="#9ca3af" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
@@ -248,7 +248,7 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
 
               <div>
                 <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#d1d5db', marginBottom: '6px' }}>
-                  Number of Coupons
+                  Number of Passes
                 </label>
                 <div style={{ display: 'flex', alignItems: 'center', height: '42px', background: '#151922', border: '1px solid rgba(212, 175, 55, 0.25)', borderRadius: '6px' }}>
                   <button
@@ -306,7 +306,7 @@ export default function BookingModal({ coupon, onClose, onSuccess }) {
               cursor: loading ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? 'Processing Coupon...' : `Claim Coupon for ₹${totalPrice.toLocaleString('en-IN')}`}
+            {loading ? 'Processing Pass...' : `Claim Pass for ₹${totalPrice.toLocaleString('en-IN')}`}
           </button>
 
           <p style={{

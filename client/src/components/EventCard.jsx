@@ -130,7 +130,7 @@ export default function EventCard({ coupon, onSelectOffer, onSelectDetails }) {
                   color: '#9ca3af',
                   textTransform: 'uppercase'
                 }}>
-                  COUPON PRICE
+                  PASS PRICE
                 </span>
               </div>
               <div style={{
@@ -189,7 +189,7 @@ export default function EventCard({ coupon, onSelectOffer, onSelectDetails }) {
               onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
             >
               <Info size={12} />
-              <span>View Coupon Details</span>
+              <span>View Pass Details</span>
             </button>
           </div>
         </div>

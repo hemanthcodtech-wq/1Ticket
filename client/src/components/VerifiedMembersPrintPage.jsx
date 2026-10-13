@@ -178,11 +178,11 @@ export default function VerifiedMembersPrintPage({ bookings = [], user }) {
                 <CheckCircle2 size={20} />
               </div>
               <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: '#ffffff', margin: 0 }}>
-                Verified Members &amp; Coupons <span className="gold-gradient-text">Print Center</span>
+                Verified Members &amp; Passes <span className="gold-gradient-text">Print Center</span>
               </h2>
             </div>
             <p style={{ margin: 0, color: '#9ca3af', fontSize: '0.86rem' }}>
-              Official verified registry of attendees and coupons redeemed at partner counters and event booths.
+              Official verified registry of attendees and passes redeemed at partner counters and event booths.
             </p>
           </div>
 
@@ -456,7 +456,7 @@ export default function VerifiedMembersPrintPage({ bookings = [], user }) {
             <CheckCircle2 size={42} color="#6b7280" style={{ margin: '0 auto 12px', opacity: 0.6 }} />
             <h4 style={{ color: '#ffffff', margin: '0 0 6px', fontSize: '1.05rem' }}>No Verified Members Found</h4>
             <p style={{ margin: 0, fontSize: '0.84rem', color: '#9ca3af' }}>
-              No coupons have been marked as redeemed matching your current search or filter criteria.
+              No passes have been marked as redeemed matching your current search or filter criteria.
             </p>
           </div>
         ) : (

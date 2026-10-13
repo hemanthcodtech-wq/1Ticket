@@ -25,7 +25,8 @@ export default function CouponsManagementPage({
   onCreateCoupon,
   onUpdateCoupon,
   onDeleteCoupon,
-  user
+  user,
+  token
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState('create'); // 'create' | 'edit'
@@ -49,6 +50,7 @@ export default function CouponsManagementPage({
   });
 
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState({ type: null, message: '' });
   const [imagePreview, setImagePreview] = useState('/coupons/lucky_dip_villa.jpg');
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('all');
@@ -57,6 +59,7 @@ export default function CouponsManagementPage({
   const handleOpenCreateModal = () => {
     setModalMode('create');
     setEditingCouponId(null);
+    setUploadStatus({ type: null, message: '' });
     setFormData({
       title: '',
       subtitle: '',
@@ -80,6 +83,7 @@ export default function CouponsManagementPage({
   const handleOpenEditModal = (coupon) => {
     setModalMode('edit');
     setEditingCouponId(coupon.id);
+    setUploadStatus({ type: null, message: '' });
     setFormData({
       title: coupon.title || '',
       subtitle: coupon.subtitle || '',
@@ -106,14 +110,23 @@ export default function CouponsManagementPage({
 
     const objectUrl = URL.createObjectURL(file);
     setImagePreview(objectUrl);
+    setUploadStatus({ type: null, message: '' });
 
     try {
       setUploadingImage(true);
       const data = new FormData();
       data.append('image', file);
 
+      // Pass Authorization header with Bearer token
+      const authToken = token || localStorage.getItem('1ticket_token');
+      const headers = {};
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
+
       const res = await fetch(getApiUrl('/api/upload'), {
         method: 'POST',
+        headers,
         body: data
       });
 
@@ -121,9 +134,19 @@ export default function CouponsManagementPage({
       if (json.success && json.imageUrl) {
         setFormData((prev) => ({ ...prev, image_url: json.imageUrl }));
         setImagePreview(json.imageUrl);
+        setUploadStatus({
+          type: 'success',
+          message: json.provider === 'cloudinary'
+            ? 'Uploaded to Cloudinary CDN successfully!'
+            : 'Uploaded to server storage successfully!'
+        });
+      } else {
+        const errorMsg = json.error || 'Failed to upload image. Please try again.';
+        setUploadStatus({ type: 'error', message: `Upload failed: ${errorMsg}` });
       }
     } catch (err) {
       console.error('Multer image upload error:', err);
+      setUploadStatus({ type: 'error', message: `Upload error: ${err.message || 'Network error'}` });
     } finally {
       setUploadingImage(false);
     }
@@ -132,6 +155,10 @@ export default function CouponsManagementPage({
   // Submit Handler (Create vs Update)
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (uploadingImage) {
+      alert('Please wait for the image upload to Cloudinary to complete before saving.');
+      return;
+    }
     setIsSaving(true);
     try {
       if (modalMode === 'edit' && editingCouponId) {
@@ -177,7 +204,7 @@ export default function CouponsManagementPage({
       }}>
         <div>
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: '#ffffff', margin: 0 }}>
-            Coupons & Festive <span className="gold-gradient-text">Offers Management</span>
+            Passes & Festive <span className="gold-gradient-text">Offers Management</span>
           </h2>
           <p style={{ margin: '4px 0 0', color: '#9ca3af', fontSize: '0.85rem' }}>
             Create, edit details, upload graphics via Multer, manage quotas, or archive offers
@@ -191,7 +218,7 @@ export default function CouponsManagementPage({
             style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px', fontSize: '0.86rem' }}
           >
             <PlusCircle size={16} />
-            <span>Create New Coupon Offer</span>
+            <span>Create New Pass Offer</span>
           </button>
         )}
       </div>
@@ -260,7 +287,7 @@ export default function CouponsManagementPage({
           color: '#9ca3af'
         }}>
           <Ticket size={40} color="#f6c042" style={{ margin: '0 auto 12px' }} />
-          <h4 style={{ color: '#fff', margin: '0 0 6px' }}>No Matching Coupons Found</h4>
+          <h4 style={{ color: '#fff', margin: '0 0 6px' }}>No Matching Passes Found</h4>
           <p style={{ fontSize: '0.84rem' }}>Try refining your search keyword or category filter.</p>
         </div>
       )}
@@ -374,7 +401,7 @@ export default function CouponsManagementPage({
               <div style={{ marginTop: 'auto', paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <span style={{ fontSize: '0.68rem', color: '#9ca3af', display: 'block' }}>COUPON PRICE</span>
+                    <span style={{ fontSize: '0.68rem', color: '#9ca3af', display: 'block' }}>PASS PRICE</span>
                     <span style={{ fontSize: '1.18rem', fontWeight: 800, color: '#f6c042' }}>
                       ₹{Number(c.price || 0).toLocaleString('en-IN')}
                     </span>
@@ -455,7 +482,7 @@ export default function CouponsManagementPage({
             }}>
               <div>
                 <h3 style={{ fontSize: '1.25rem', margin: 0, color: '#ffffff', fontWeight: 700 }}>
-                  {modalMode === 'edit' ? 'Edit Coupon Campaign' : 'Create New Coupon Campaign'}
+                  {modalMode === 'edit' ? 'Edit Pass Campaign' : 'Create New Pass Campaign'}
                 </h3>
                 <span style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
                   {modalMode === 'edit'
@@ -475,7 +502,7 @@ export default function CouponsManagementPage({
               {/* Multer Image Upload Box */}
               <div style={{ marginBottom: '18px' }}>
                 <label style={{ display: 'block', fontSize: '0.82rem', fontWeight: 600, color: '#d1d5db', marginBottom: '8px' }}>
-                  Coupon Banner Image (Cloudinary CDN / Multer)
+                  Pass Banner Image (Cloudinary CDN / Multer)
                 </label>
                 <div style={{
                   border: '2px dashed rgba(212, 175, 55, 0.4)',
@@ -500,37 +527,102 @@ export default function CouponsManagementPage({
                       src={imagePreview}
                       alt="Banner Preview"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      onError={(e) => {
+                        e.target.src = '/coupons/lucky_dip_villa.jpg';
+                      }}
                     />
                   </div>
 
                   <div style={{ flex: 1, textAlign: 'left' }}>
-                    <label style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      background: 'rgba(246, 192, 66, 0.15)',
-                      border: '1px solid rgba(246, 192, 66, 0.4)',
-                      color: '#f6c042',
-                      padding: '7px 14px',
-                      borderRadius: '6px',
-                      fontSize: '0.82rem',
-                      fontWeight: 600,
-                      cursor: 'pointer'
-                    }}>
-                      <Upload size={14} />
-                      <span>{uploadingImage ? 'Uploading to Cloudinary...' : 'Upload Image File'}</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageFileChange}
-                        style={{ display: 'none' }}
-                        disabled={uploadingImage}
-                      />
-                    </label>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                      <label style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        background: 'rgba(246, 192, 66, 0.15)',
+                        border: '1px solid rgba(246, 192, 66, 0.4)',
+                        color: '#f6c042',
+                        padding: '7px 14px',
+                        borderRadius: '6px',
+                        fontSize: '0.82rem',
+                        fontWeight: 600,
+                        cursor: uploadingImage ? 'not-allowed' : 'pointer',
+                        opacity: uploadingImage ? 0.7 : 1
+                      }}>
+                        {uploadingImage ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
+                        <span>{uploadingImage ? 'Uploading to Cloudinary...' : 'Upload Image File'}</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageFileChange}
+                          style={{ display: 'none' }}
+                          disabled={uploadingImage}
+                        />
+                      </label>
+
+                      {formData.image_url?.includes('cloudinary.com') && (
+                        <span style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          background: 'rgba(34, 197, 94, 0.12)',
+                          color: '#4ade80',
+                          border: '1px solid rgba(34, 197, 94, 0.3)',
+                          padding: '3px 8px',
+                          borderRadius: '12px',
+                          fontSize: '0.72rem',
+                          fontWeight: 500
+                        }}>
+                          <CheckCircle2 size={12} /> Cloudinary CDN Active
+                        </span>
+                      )}
+                    </div>
+
+                    {uploadStatus.message && (
+                      <div style={{
+                        marginTop: '8px',
+                        fontSize: '0.75rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        color: uploadStatus.type === 'success' ? '#4ade80' : '#f87171'
+                      }}>
+                        {uploadStatus.type === 'success' ? <CheckCircle2 size={13} /> : <AlertCircle size={13} />}
+                        <span>{uploadStatus.message}</span>
+                      </div>
+                    )}
+
                     <span style={{ display: 'block', fontSize: '0.72rem', color: '#9ca3af', marginTop: '6px' }}>
                       Supports PNG, JPG, WEBP. Uploads directly to Cloudinary CDN via Multer storage.
                     </span>
                   </div>
+                </div>
+
+                {/* Direct Image URL input for verification / manual URL */}
+                <div style={{ marginTop: '10px' }}>
+                  <label style={{ display: 'block', fontSize: '0.74rem', color: '#9ca3af', marginBottom: '4px' }}>
+                    Banner Image URL (Cloudinary CDN link or image URL)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.image_url}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setFormData((prev) => ({ ...prev, image_url: val }));
+                      if (val) setImagePreview(val);
+                    }}
+                    placeholder="https://res.cloudinary.com/..."
+                    style={{
+                      width: '100%',
+                      padding: '7px 10px',
+                      background: '#151922',
+                      border: '1px solid rgba(212, 175, 55, 0.25)',
+                      borderRadius: '6px',
+                      color: '#ffffff',
+                      fontSize: '0.78rem',
+                      fontFamily: 'monospace'
+                    }}
+                  />
                 </div>
               </div>
 
@@ -542,7 +634,7 @@ export default function CouponsManagementPage({
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Lucky Dip Villa Coupon"
+                  placeholder="e.g. Lucky Dip Villa Pass"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   style={{
@@ -660,7 +752,7 @@ export default function CouponsManagementPage({
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px', marginBottom: '14px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.8rem', color: '#d1d5db', marginBottom: '4px' }}>
-                    Coupon Price (₹) *
+                    Pass Price (₹) *
                   </label>
                   <input
                     type="number"

@@ -580,7 +580,7 @@ export default function App() {
                 maxWidth: '580px'
               }}
             >
-              Discover exclusive coupons, exciting offers, and extraordinary experiences.
+              Discover exclusive passes, exciting offers, and extraordinary experiences.
             </motion.p>
 
             {/* Prominent Explore Offers CTA Button */}
@@ -775,7 +775,7 @@ export default function App() {
           <div className="section-heading-row" style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <TypewriterHeader
               as="h2"
-              text="Explore Exclusive Coupons"
+              text="Explore Exclusive Passes"
               speed={42}
               delay={200}
               style={{
@@ -853,10 +853,10 @@ export default function App() {
           })}
         </div>
 
-        {/* 5 Coupons Row with Reusable Universal Coupon Template */}
+        {/* 5 Passes Row with Reusable Universal Pass Template */}
         {loading ? (
           <div style={{ textAlign: 'center', padding: '60px 0', color: '#f6c042' }}>
-            <p>Loading festive exclusive coupons...</p>
+            <p>Loading festive exclusive passes...</p>
           </div>
         ) : filteredCoupons.length === 0 ? (
           <div style={{
@@ -867,7 +867,7 @@ export default function App() {
             border: '1px dashed rgba(212, 175, 55, 0.3)'
           }}>
             <p style={{ color: '#d1d5db', fontSize: '1rem', marginBottom: '12px' }}>
-              No coupons found matching your query.
+              No passes found matching your query.
             </p>
             <button
               onClick={() => {
@@ -1071,13 +1071,13 @@ export default function App() {
               boxShadow: '0 20px 50px rgba(0, 0, 0, 0.65)'
             }}>
               <p style={{ fontSize: '0.94rem', color: '#e5e7eb', lineHeight: 1.7, margin: '0 0 16px' }}>
-                Presented by <strong style={{ color: '#f6c042', fontWeight: 700 }}>1ticket</strong>, your destination for exclusive promotional coupons, exciting offers, and extraordinary opportunities.
+                Presented by <strong style={{ color: '#f6c042', fontWeight: 700 }}>1ticket</strong>, your destination for exclusive promotional passes, exciting offers, and extraordinary opportunities.
               </p>
               <p style={{ fontSize: '0.91rem', color: '#9ca3af', lineHeight: 1.7, margin: '0 0 16px' }}>
                 Created with a vision to make discovering special offers more convenient and rewarding, 1ticket brings together a curated range of promotional campaigns spanning property benefits, luxury gifts, construction offers, festive specials, and unique learning experiences.
               </p>
               <p style={{ fontSize: '0.91rem', color: '#9ca3af', lineHeight: 1.7, margin: '0 0 16px' }}>
-                From exploring exclusive villa and plot promotions to discovering exciting gift campaigns and special festival offers, 1ticket delivers a premium digital experience where customers can explore opportunities, understand the benefits, and access eligible coupons with ease.
+                From exploring exclusive villa and plot promotions to discovering exciting gift campaigns and special festival offers, 1ticket delivers a premium digital experience where customers can explore opportunities, understand the benefits, and access eligible passes with ease.
               </p>
               <p style={{ fontSize: '0.91rem', color: '#9ca3af', lineHeight: 1.7, margin: '0 0 24px' }}>
                 Whether you are looking for an exciting promotional offer, a special gift opportunity, or a valuable deal for your next big decision, 1ticket makes every discovery feel special through a seamless, customer-focused experience.
@@ -1104,7 +1104,7 @@ export default function App() {
                     Exclusive Promotional Offers
                   </h4>
                   <p style={{ fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.5, margin: 0 }}>
-                    Discover exciting coupons, special campaigns, and offers across multiple categories.
+                    Discover exciting passes, special campaigns, and offers across multiple categories.
                   </p>
                 </div>
 
@@ -1127,7 +1127,7 @@ export default function App() {
                     Premium Digital Experience
                   </h4>
                   <p style={{ fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.5, margin: 0 }}>
-                    Explore offers, access coupon details, and follow redemption instructions through one convenient platform.
+                    Explore offers, access pass details, and follow redemption instructions through one convenient platform.
                   </p>
                 </div>
 
@@ -1150,7 +1150,7 @@ export default function App() {
                     Transparent Offer Details
                   </h4>
                   <p style={{ fontSize: '0.8rem', color: '#9ca3af', lineHeight: 1.5, margin: 0 }}>
-                    Understand coupon values, eligibility requirements, validity periods, and applicable terms before making a purchase.
+                    Understand pass values, eligibility requirements, validity periods, and applicable terms before making a purchase.
                   </p>
                 </div>
 
@@ -1387,15 +1387,15 @@ export default function App() {
             {[
               {
                 q: 'What is 1ticket and how do promotional campaigns work?',
-                a: '1ticket is an authentic digital discovery and ticketing platform for exclusive promotional campaigns, lucky dip opportunities, and special festive offers. Customers can explore curated campaigns spanning property benefits, luxury gifts, construction promotions, and art workshops, then purchase digital coupons with transparent terms.'
+                a: '1ticket is an authentic digital discovery and ticketing platform for exclusive promotional campaigns, lucky dip opportunities, and special festive offers. Customers can explore curated campaigns spanning property benefits, luxury gifts, construction promotions, and art workshops, then purchase digital passes with transparent terms.'
               },
               {
                 q: 'Will I receive my QR pass and booking receipt immediately?',
-                a: 'Yes, immediately! As soon as payment is confirmed, your digital pass featuring a unique QR code is displayed on your screen and simultaneously sent to your registered email address via Nodemailer. You can also view or save your voucher passes anytime under "My Coupons".'
+                a: 'Yes, immediately! As soon as payment is confirmed, your digital pass featuring a unique QR code is displayed on your screen and simultaneously sent to your registered email address via Nodemailer. You can also view or save your voucher passes anytime under "My Passes".'
               },
               {
                 q: 'How does the Lucky Dip Villa & Promotional Draw work?',
-                a: 'Participation in draw-based campaigns (such as the Lucky Dip Villa Coupon) is confirmed upon purchasing your pass. The official, transparent draw takes place at White House Convention on the announced date. All verified ticket codes are entered into the draw, and winners are contacted via registered email and phone.'
+                a: 'Participation in draw-based campaigns (such as the Lucky Dip Villa Pass) is confirmed upon purchasing your pass. The official, transparent draw takes place at White House Convention on the announced date. All verified ticket codes are entered into the draw, and winners are contacted via registered email and phone.'
               },
               {
                 q: 'Can I purchase passes for multiple guests or family members?',
@@ -1584,7 +1584,7 @@ export default function App() {
                 alignItems: 'center'
               }}>
                 <div>
-                  <span style={{ fontSize: '0.75rem', color: '#9ca3af', display: 'block' }}>COUPON PRICE</span>
+                  <span style={{ fontSize: '0.75rem', color: '#9ca3af', display: 'block' }}>PASS PRICE</span>
                   <span style={{ fontSize: '1.3rem', fontWeight: 800, color: '#f6c042' }}>
                     ₹{Number(selectedCouponDetails.price).toLocaleString('en-IN')}
                   </span>
@@ -1598,7 +1598,7 @@ export default function App() {
                   className="btn-gold"
                   style={{ padding: '10px 24px' }}
                 >
-                  Claim This Coupon
+                  Claim This Pass
                 </button>
               </div>
 

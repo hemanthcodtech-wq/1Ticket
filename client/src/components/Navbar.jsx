@@ -41,7 +41,7 @@ export default function Navbar({
     { id: 'explore', label: 'Explore Offers', icon: Compass },
     { id: 'how-it-works', label: 'How It Works', icon: Layers },
     { id: 'faq', label: 'FAQ', icon: HelpCircle },
-    { id: 'my-coupons', label: 'My Coupons', icon: Ticket }
+    { id: 'my-coupons', label: 'My Passes', icon: Ticket }
   ];
 
   return (

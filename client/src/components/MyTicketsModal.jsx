@@ -64,7 +64,7 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
       } else {
         setServerBookings([]);
         setIsVerified(false);
-        setError(data.error || 'Both email and mobile number must match your purchase records. No coupons found.');
+        setError(data.error || 'Both email and mobile number must match your purchase records. No passes found.');
       }
     } catch (err) {
       console.error('Validation error:', err);
@@ -138,7 +138,7 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <h2 style={{ fontSize: '1.25rem', color: '#ffffff', margin: 0, fontWeight: 700 }}>
-                  My Coupons & Passes <span className="gold-gradient-text">Wallet</span>
+                  My Passes <span className="gold-gradient-text">Wallet</span>
                 </h2>
                 <span style={{
                   fontSize: '0.66rem',
@@ -154,8 +154,8 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
               </div>
               <p style={{ margin: '3px 0 0', fontSize: '0.78rem', color: '#9ca3af' }}>
                 {isVerified
-                  ? `Showing coupons registered to ${userEmail}`
-                  : 'Verify your credentials to view your authentic coupon vouchers'}
+                  ? `Showing passes registered to ${userEmail}`
+                  : 'Verify your credentials to view your authentic pass vouchers'}
               </p>
             </div>
           </div>
@@ -206,7 +206,7 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
                 Verify Your Registered Details
               </h3>
               <p style={{ fontSize: '0.82rem', color: '#9ca3af', margin: '0 0 22px', lineHeight: 1.5 }}>
-                Please provide your Email Address and Mobile Number used during coupon checkout to access your scannable passes.
+                Please provide your Email Address and Mobile Number used during pass checkout to access your scannable passes.
               </p>
 
               {error && (
@@ -297,7 +297,7 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
                   }}
                 >
                   <Sparkles size={16} />
-                  <span>{loading ? 'Validating Account...' : 'Validate & Showcase Coupons'}</span>
+                  <span>{loading ? 'Validating Account...' : 'Validate & Showcase Passes'}</span>
                 </button>
               </form>
             </div>
@@ -341,7 +341,7 @@ export default function MyTicketsModal({ bookings = [], onSelectPass, onClose, o
                 <Search size={16} color="#9ca3af" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
                 <input
                   type="text"
-                  placeholder="Filter coupons by title or code..."
+                  placeholder="Filter passes by title or code..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{

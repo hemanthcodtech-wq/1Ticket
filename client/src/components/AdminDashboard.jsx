@@ -152,13 +152,13 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
       });
       const data = await res.json();
       if (data.success) {
-        showToast('Coupon campaign created and published successfully!');
+        showToast('Pass campaign created and published successfully!');
         loadDashboardData();
       } else {
-        showToast(data.error || 'Failed to create coupon', 'error');
+        showToast(data.error || 'Failed to create pass', 'error');
       }
     } catch (err) {
-      showToast('Error creating coupon campaign', 'error');
+      showToast('Error creating pass campaign', 'error');
     }
   };
 
@@ -174,21 +174,21 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
       });
       const data = await res.json();
       if (data.success) {
-        showToast('Coupon offer updated successfully!');
+        showToast('Pass offer updated successfully!');
         loadDashboardData();
         return true;
       } else {
-        showToast(data.error || 'Failed to update coupon', 'error');
+        showToast(data.error || 'Failed to update pass', 'error');
         return false;
       }
     } catch (err) {
-      showToast('Error updating coupon campaign', 'error');
+      showToast('Error updating pass campaign', 'error');
       return false;
     }
   };
 
   const handleDeleteCoupon = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this coupon?')) return;
+    if (!window.confirm('Are you sure you want to delete this pass?')) return;
     try {
       const res = await fetch(getApiUrl(`/api/events/${id}`), {
         method: 'DELETE',
@@ -196,13 +196,13 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
       });
       const data = await res.json();
       if (data.success) {
-        showToast('Coupon deleted');
+        showToast('Pass deleted');
         loadDashboardData();
       } else {
         showToast(data.error || 'Delete failed', 'error');
       }
     } catch (err) {
-      showToast('Error deleting coupon', 'error');
+      showToast('Error deleting pass', 'error');
     }
   };
 
@@ -260,7 +260,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
           },
           {
             id: 'coupons',
-            label: 'Coupons Management',
+            label: 'Passes Management',
             badge: coupons.length ? `${coupons.length}` : null,
             icon: <Ticket size={18} />
           }
@@ -677,6 +677,7 @@ export default function AdminDashboard({ user, token, onLogout, onReturnHome }) 
               {activePage === 'coupons' && user.role === 'admin' && (
                 <CouponsManagementPage
                   coupons={coupons}
+                  token={token}
                   onCreateCoupon={handleCreateCoupon}
                   onUpdateCoupon={handleUpdateCoupon}
                   onDeleteCoupon={handleDeleteCoupon}

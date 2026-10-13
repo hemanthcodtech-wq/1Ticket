@@ -108,7 +108,7 @@ export default function ExploreCouponsPage({
             as="h1"
             segments={[
               { text: 'Explore Exclusive ' },
-              { text: 'Coupons & Passes', className: 'gold-gradient-text' }
+              { text: 'Passes & Offers', className: 'gold-gradient-text' }
             ]}
             speed={40}
             delay={150}
@@ -296,7 +296,7 @@ export default function ExploreCouponsPage({
         {/* Results Counter */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
           <span style={{ fontSize: '0.88rem', color: '#9ca3af' }}>
-            Showing <strong style={{ color: '#f6c042' }}>{filtered.length}</strong> available coupons
+            Showing <strong style={{ color: '#f6c042' }}>{filtered.length}</strong> available passes
           </span>
           {(searchQuery || selectedCategory !== 'All' || selectedOfferType !== 'All') && (
             <button
@@ -323,7 +323,7 @@ export default function ExploreCouponsPage({
         {/* 3-Per-Row Grid Display */}
         {loading ? (
           <div style={{ textAlign: 'center', padding: '80px 20px', color: '#f6c042' }}>
-            <p>Loading coupons catalogue...</p>
+            <p>Loading passes catalogue...</p>
           </div>
         ) : filtered.length === 0 ? (
           <div style={{
@@ -335,7 +335,7 @@ export default function ExploreCouponsPage({
             color: '#9ca3af'
           }}>
             <Ticket size={48} color="#f6c042" style={{ margin: '0 auto 16px' }} />
-            <h3 style={{ color: '#ffffff', margin: '0 0 8px', fontSize: '1.25rem' }}>No Coupons Found</h3>
+            <h3 style={{ color: '#ffffff', margin: '0 0 8px', fontSize: '1.25rem' }}>No Passes Found</h3>
             <p style={{ fontSize: '0.9rem', maxWidth: '440px', margin: '0 auto 20px' }}>
               We could not find any active offers matching your search criteria. Try a different category or clear the search.
             </p>
@@ -347,7 +347,7 @@ export default function ExploreCouponsPage({
               }}
               className="btn-gold"
             >
-              View All Coupons
+              View All Passes
             </button>
           </div>
         ) : (

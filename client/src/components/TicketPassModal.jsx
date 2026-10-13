@@ -84,7 +84,7 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <CheckCircle2 size={20} color="#22c55e" />
             <h2 style={{ fontSize: '1.18rem', margin: 0, color: '#ffffff', fontFamily: 'var(--font-serif)' }}>
-              Verified Coupon Pass
+              Verified Pass
             </h2>
           </div>
           <button
@@ -146,7 +146,7 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
             {/* Voucher Body */}
             <div style={{ padding: '20px 18px 16px' }}>
               <h3 style={{ fontSize: '1.2rem', color: '#ffffff', margin: '0 0 6px', lineHeight: 1.25, fontWeight: 800, fontFamily: 'var(--font-serif)' }}>
-                {booking.event_title || 'Exclusive Coupon Offer'}
+                {booking.event_title || 'Exclusive Pass Offer'}
               </h3>
               <p style={{ margin: '0 0 16px', fontSize: '0.78rem', color: '#9ca3af' }}>
                 Present this certified QR voucher at the partner venue or customer registration desk.
@@ -234,7 +234,7 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '0.64rem', color: '#9ca3af', display: 'block', textTransform: 'uppercase' }}>COUPON SERIAL CODE</span>
+                  <span style={{ fontSize: '0.64rem', color: '#9ca3af', display: 'block', textTransform: 'uppercase' }}>PASS SERIAL CODE</span>
                   <span
                     style={{
                       fontSize: '1.18rem',
@@ -293,7 +293,7 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
               }}
             >
               <Check size={16} />
-              <span>Coupon pass PNG image downloaded successfully!</span>
+              <span>Pass PNG image downloaded successfully!</span>
             </div>
           )}
 
@@ -318,7 +318,7 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
                 }}
               >
                 <Download size={16} />
-                <span>{downloading ? 'Exporting...' : downloadSuccess ? 'Downloaded!' : 'Download Coupon'}</span>
+                <span>{downloading ? 'Exporting...' : downloadSuccess ? 'Downloaded!' : 'Download Pass'}</span>
               </button>
 
               <button
@@ -381,8 +381,8 @@ export default function TicketPassModal({ booking, onClose, onOpenTerms }) {
               <strong style={{ color: '#f6c042', display: 'block', marginBottom: '4px' }}>
                 Official Offer Terms & Redemption Guidelines:
               </strong>
-              1. This coupon must be presented at venue registration or booking desk with valid government ID.<br />
-              2. Coupon is valid until the stated campaign expiry date and is non-transferable unless authorized.<br />
+              1. This pass must be presented at venue registration or booking desk with valid government ID.<br />
+              2. Pass is valid until the stated campaign expiry date and is non-transferable unless authorized.<br />
               3. Payments processed via secure Razorpay checkout; verified pass codes are authenticated against 1ticket records.
             </div>
           )}

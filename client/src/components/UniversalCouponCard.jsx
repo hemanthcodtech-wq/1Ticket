@@ -365,7 +365,7 @@ export default function UniversalCouponCard({
                   display: 'block'
                 }}
               >
-                COUPON PRICE
+                PASS PRICE
               </span>
               <div
                 style={{
@@ -436,7 +436,7 @@ export default function UniversalCouponCard({
               onMouseEnter={(e) => (e.currentTarget.style.color = '#f6c042')}
               onMouseLeave={(e) => (e.currentTarget.style.color = subtextColor)}
             >
-              <span>View Coupon Details</span>
+              <span>View Pass Details</span>
             </button>
           </div>
         </div>

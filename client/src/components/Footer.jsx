@@ -65,7 +65,7 @@ export default function Footer({ onNavigate, onOpenLegal }) {
               lineHeight: 1.6,
               marginBottom: '16px'
             }}>
-              Your premier destination for verified real estate coupons, festive promotions, lifestyle draws, and high-value booking benefits.
+              Your premier destination for verified real estate passes, festive promotions, lifestyle draws, and high-value booking benefits.
             </p>
             <div style={{
               display: 'inline-flex',
@@ -139,7 +139,7 @@ export default function Footer({ onNavigate, onOpenLegal }) {
                   onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
                 >
                   <ChevronRight size={13} color="#f6c042" />
-                  <span>Exclusive Coupons</span>
+                  <span>Exclusive Passes</span>
                 </button>
               </li>
               <li>
@@ -199,7 +199,7 @@ export default function Footer({ onNavigate, onOpenLegal }) {
                   onMouseLeave={(e) => e.currentTarget.style.color = '#9ca3af'}
                 >
                   <ChevronRight size={13} color="#f6c042" />
-                  <span>My Saved Coupons</span>
+                  <span>My Passes</span>
                 </button>
               </li>
               <li>
@@ -243,7 +243,7 @@ export default function Footer({ onNavigate, onOpenLegal }) {
                 { id: 'privacy', name: 'Privacy Policy' },
                 { id: 'refund', name: 'Refund & Cancellation' },
                 { id: 'disclaimer', name: 'Statutory Disclaimer' },
-                { id: 'coupon-policy', name: 'Coupon Redemption Policy' },
+                { id: 'coupon-policy', name: 'Pass Redemption Policy' },
                 { id: 'cookie', name: 'Cookie Policy' },
                 { id: 'campaign-cancel', name: 'Campaign Cancellation' },
                 { id: 'shipping', name: 'Shipping & Delivery' }
@@ -284,7 +284,7 @@ export default function Footer({ onNavigate, onOpenLegal }) {
               Customer Care
             </h4>
             <p style={{ fontSize: '0.82rem', color: '#9ca3af', lineHeight: 1.5, marginBottom: '14px' }}>
-              Have questions regarding offer verification or redeeming a promotional coupon?
+              Have questions regarding offer verification or redeeming a promotional pass?
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.82rem', color: '#d1d5db' }}>

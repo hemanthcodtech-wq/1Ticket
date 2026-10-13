@@ -91,7 +91,7 @@ export default function RevenueReportsPage({ stats, bookings = [], onRefresh, lo
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
             <span style={{ fontSize: '0.76rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
-              Coupons Purchased
+              Passes Purchased
             </span>
             <div style={{
               width: '36px',
@@ -273,7 +273,7 @@ export default function RevenueReportsPage({ stats, bookings = [], onRefresh, lo
 
         {bookings.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '40px 20px', color: '#6b7280' }}>
-            No customer orders recorded yet. As users purchase coupons, live revenue entries appear here.
+            No customer orders recorded yet. As users purchase passes, live revenue entries appear here.
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>

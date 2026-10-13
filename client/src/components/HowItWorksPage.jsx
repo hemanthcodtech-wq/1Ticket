@@ -27,9 +27,9 @@ export default function HowItWorksPage({ onExploreCoupons }) {
       title: 'Step 1: Explore Exclusive Offers',
       icon: <Compass size={24} color="#f6c042" />,
       tag: 'Discovery',
-      desc: 'Browse our collection of available coupons and promotional campaigns, including:',
+      desc: 'Browse our collection of available passes and promotional campaigns, including:',
       items: [
-        'Lucky Dip Villa Coupon',
+        'Lucky Dip Villa Pass',
         'Villa Booking Benefits',
         'Baleno Car Gift Offers',
         'House Construction Offers',
@@ -40,11 +40,11 @@ export default function HowItWorksPage({ onExploreCoupons }) {
     },
     {
       number: '02',
-      title: 'Step 2: Select Your Coupon',
+      title: 'Step 2: Select Your Pass',
       icon: <Ticket size={24} color="#f6c042" />,
       tag: 'Evaluation',
       desc: 'Choose the offer that interests you and open its details page.',
-      body: 'Review the coupon price, applicable benefits, validity period, eligibility, redemption process, exclusions, and any additional conditions.',
+      body: 'Review the pass price, applicable benefits, validity period, eligibility, redemption process, exclusions, and any additional conditions.',
       footerNote: 'Please confirm that you understand the offer before purchasing.'
     },
     {
@@ -53,41 +53,41 @@ export default function HowItWorksPage({ onExploreCoupons }) {
       icon: <LogIn size={24} color="#f6c042" />,
       tag: 'Authentication',
       desc: 'Create an account or sign in using the available registration options.',
-      body: 'Provide accurate contact information so that we can communicate important information about your order, coupon status, and any applicable campaign updates.'
+      body: 'Provide accurate contact information so that we can communicate important information about your order, pass status, and any applicable campaign updates.'
     },
     {
       number: '04',
       title: 'Step 4: Complete Your Purchase',
       icon: <CreditCard size={24} color="#f6c042" />,
       tag: 'Checkout & Payment',
-      desc: 'If the selected coupon is available for purchase, follow the checkout instructions and complete the payment using the payment methods displayed on the website.',
+      desc: 'If the selected pass is available for purchase, follow the checkout instructions and complete the payment using the payment methods displayed on the website.',
       body: 'Your order will be processed after the payment status has been verified. A payment receipt or order confirmation will be provided according to the available checkout functionality.'
     },
     {
       number: '05',
-      title: 'Step 5: Access Your Coupon',
+      title: 'Step 5: Access Your Pass',
       icon: <QrCode size={24} color="#f6c042" />,
       tag: 'Instant Pass',
-      desc: 'After successful confirmation, visit the My Coupons section of your account to view your coupon details.',
-      body: 'Depending on the offer, the coupon may include a unique coupon ID, QR code, validity period, redemption instructions, or other identifying information.',
-      warning: 'Keep your coupon details secure and do not share private redemption information with unauthorized persons.'
+      desc: 'After successful confirmation, visit the My Passes section of your account to view your pass details.',
+      body: 'Depending on the offer, the pass may include a unique pass ID, QR code, validity period, redemption instructions, or other identifying information.',
+      warning: 'Keep your pass details secure and do not share private redemption information with unauthorized persons.'
     },
     {
       number: '06',
       title: 'Step 6: Redeem or Participate According to the Offer',
       icon: <Gift size={24} color="#f6c042" />,
       tag: 'Redemption & Draws',
-      desc: 'Each coupon may follow a different process.',
-      body: 'Some offers may require direct redemption, a qualifying villa booking, a construction agreement, course registration, or participation in a separately defined promotional campaign. Follow the instructions and eligibility conditions published for your specific coupon.',
-      footerNote: 'A coupon purchase does not automatically guarantee a prize, property allocation, vehicle gift, cash benefit, or discount unless the published offer explicitly confirms that entitlement.'
+      desc: 'Each pass may follow a different process.',
+      body: 'Some offers may require direct redemption, a qualifying villa booking, a construction agreement, course registration, or participation in a separately defined promotional campaign. Follow the instructions and eligibility conditions published for your specific pass.',
+      footerNote: 'A pass purchase does not automatically guarantee a prize, property allocation, vehicle gift, cash benefit, or discount unless the published offer explicitly confirms that entitlement.'
     },
     {
       number: '07',
       title: 'Step 7: Get Assistance When Needed',
       icon: <Headphones size={24} color="#f6c042" />,
       tag: '24/7 Support',
-      desc: 'If you have questions about an offer, payment, coupon status, or redemption, contact our support team through the contact details published on this website.',
-      footerNote: 'Please include your order ID or coupon ID when contacting us, where applicable.'
+      desc: 'If you have questions about an offer, payment, pass status, or redemption, contact our support team through the contact details published on this website.',
+      footerNote: 'Please include your order ID or pass ID when contacting us, where applicable.'
     }
   ];
 
@@ -168,7 +168,7 @@ export default function HowItWorksPage({ onExploreCoupons }) {
             lineHeight: 1.6,
             marginBottom: '14px'
           }}>
-            Welcome to 1ticket, your destination for discovering exclusive promotional coupons, property-related offers, lifestyle benefits, and special campaigns.
+            Welcome to 1ticket, your destination for discovering exclusive promotional passes, property-related offers, lifestyle benefits, and special campaigns.
           </p>
 
           <p style={{
@@ -177,7 +177,7 @@ export default function HowItWorksPage({ onExploreCoupons }) {
             lineHeight: 1.6,
             marginBottom: '28px'
           }}>
-            Our goal is to make it easy for you to explore available offers, understand their terms, purchase eligible coupons where applicable, and manage your coupon details in one convenient place.
+            Our goal is to make it easy for you to explore available offers, understand their terms, purchase eligible passes where applicable, and manage your pass details in one convenient place.
           </p>
 
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
@@ -186,7 +186,7 @@ export default function HowItWorksPage({ onExploreCoupons }) {
               className="btn-gold"
               style={{ padding: '11px 26px', fontSize: '0.92rem' }}
             >
-              <span>Explore Available Coupons</span>
+              <span>Explore Available Passes</span>
               <ArrowRight size={16} />
             </button>
             <a
@@ -212,7 +212,7 @@ export default function HowItWorksPage({ onExploreCoupons }) {
             Seven Simple Steps to <span className="gold-gradient-text">Your Rewards</span>
           </h2>
           <p style={{ color: '#9ca3af', fontSize: '0.9rem' }}>
-            Follow our verified transparent journey from coupon discovery to final reward redemption.
+            Follow our verified transparent journey from pass discovery to final reward redemption.
           </p>
         </div>
 
@@ -450,7 +450,7 @@ export default function HowItWorksPage({ onExploreCoupons }) {
             lineHeight: 1.6,
             marginBottom: '24px'
           }}>
-            Always review the applicable offer terms before purchasing a coupon.
+            Always review the applicable offer terms before purchasing a pass.
           </p>
 
           {/* Highlight Quote */}
@@ -477,7 +477,7 @@ export default function HowItWorksPage({ onExploreCoupons }) {
             className="btn-gold"
             style={{ padding: '12px 28px', fontSize: '0.95rem' }}
           >
-            <span>Start Exploring Coupons Now</span>
+            <span>Start Exploring Passes Now</span>
             <ArrowRight size={16} />
           </button>
         </div>

@@ -20,7 +20,7 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
     { id: 'privacy', name: 'Privacy Policy', icon: <ShieldCheck size={16} /> },
     { id: 'refund', name: 'Refund & Cancellation', icon: <RotateCcw size={16} /> },
     { id: 'disclaimer', name: 'Disclaimer', icon: <AlertTriangle size={16} /> },
-    { id: 'coupon-policy', name: 'Coupon Redemption', icon: <Gift size={16} /> },
+    { id: 'coupon-policy', name: 'Pass Redemption', icon: <Gift size={16} /> },
     { id: 'cookie', name: 'Cookie Policy', icon: <Cookie size={16} /> },
     { id: 'campaign-cancel', name: 'Campaign Cancellation', icon: <CalendarX size={16} /> },
     { id: 'shipping', name: 'Shipping & Delivery', icon: <Truck size={16} /> },
@@ -142,7 +142,7 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
                   <strong>Last Updated:</strong> October 2026
                 </p>
                 <p>
-                  Welcome to 1ticket. These Terms and Conditions govern your access to and use of the 1ticket website, its coupon listings, promotional campaigns, and related services.
+                  Welcome to 1ticket. These Terms and Conditions govern your access to and use of the 1ticket website, its pass listings, promotional campaigns, and related services.
                 </p>
                 <p>
                   By accessing the website or purchasing an offer, you acknowledge that you have read these terms. Where required, your explicit acceptance will be obtained before purchase.
@@ -150,7 +150,7 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>1. About the Platform</h3>
                 <p>
-                  1ticket provides an online interface for discovering promotional coupons and offers. The role of 1ticket in each transaction, including whether it acts as a seller, intermediary, authorized agent, or campaign operator, will be disclosed where applicable.
+                  1ticket provides an online interface for discovering promotional passes and offers. The role of 1ticket in each transaction, including whether it acts as a seller, intermediary, authorized agent, or campaign operator, will be disclosed where applicable.
                 </p>
                 <p>
                   The identity of the responsible seller, promoter, property developer, course provider, or other offer provider will be stated in the relevant offer documentation.
@@ -177,10 +177,10 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
                   You are responsible for activities carried out through your account, subject to applicable law and any security obligations that apply to us.
                 </p>
 
-                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>4. Coupon Listings and Offer Information</h3>
-                <p>Each coupon or offer may have separate terms covering:</p>
+                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>4. Pass Listings and Offer Information</h3>
+                <p>Each pass or offer may have separate terms covering:</p>
                 <ul style={{ paddingLeft: '20px', marginBottom: '16px' }}>
-                  <li>Coupon price and availability.</li>
+                  <li>Pass price and availability.</li>
                   <li>Benefits and exclusions.</li>
                   <li>Validity and expiry.</li>
                   <li>Redemption procedure.</li>
@@ -201,9 +201,9 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
                   An order is considered confirmed only when the platform or responsible seller has verified the transaction and issued the applicable confirmation.
                 </p>
 
-                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>6. Coupon Issuance and Redemption</h3>
+                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>6. Pass Issuance and Redemption</h3>
                 <p>
-                  A coupon may be issued digitally or through another method specified in the offer details. Coupons must be used in accordance with their validity, eligibility, and redemption conditions. Expired, duplicated, altered, fraudulent, or previously redeemed coupons may be rejected, subject to applicable law.
+                  A pass may be issued digitally or through another method specified in the offer details. Passes must be used in accordance with their validity, eligibility, and redemption conditions. Expired, duplicated, altered, fraudulent, or previously redeemed passes may be rejected, subject to applicable law.
                 </p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>7. Lucky Dip, Gifts, and Promotional Campaigns</h3>
@@ -216,14 +216,14 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>8. Property and Construction Offers</h3>
                 <p>
-                  Property-related offers may be subject to property availability, project approvals, separate agreements, payment schedules, applicable taxes, registration charges, and other disclosed conditions. A coupon does not itself constitute a property allotment, sale deed, title document, construction contract, or guarantee of appreciation unless the relevant signed documentation expressly provides otherwise.
+                  Property-related offers may be subject to property availability, project approvals, separate agreements, payment schedules, applicable taxes, registration charges, and other disclosed conditions. A pass does not itself constitute a property allotment, sale deed, title document, construction contract, or guarantee of appreciation unless the relevant signed documentation expressly provides otherwise.
                 </p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>9. User Conduct</h3>
                 <p>You must not:</p>
                 <ul style={{ paddingLeft: '20px', marginBottom: '16px' }}>
                   <li>Use the website for unlawful or fraudulent activities.</li>
-                  <li>Manipulate coupon codes, redemption records, or promotional results.</li>
+                  <li>Manipulate pass codes, redemption records, or promotional results.</li>
                   <li>Attempt unauthorized access to accounts or systems.</li>
                   <li>Submit false identity, payment, or eligibility information.</li>
                   <li>Interfere with the security or availability of the platform.</li>
@@ -252,14 +252,14 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>1. Information We Collect</h3>
                 <p><strong>Account information:</strong> Name, Email address, Mobile number, Login preferences.</p>
-                <p><strong>Order and coupon information:</strong> Order ID, Coupon ID, transaction status, redemption history, support correspondence.</p>
+                <p><strong>Order and pass information:</strong> Order ID, Pass ID, transaction status, redemption history, support correspondence.</p>
                 <p><strong>Payment information:</strong> Payment reference, transaction status. Payment card or bank credentials are processed via designated secure payment gateways and not stored by 1ticket.</p>
                 <p><strong>Technical information:</strong> IP address, device & browser metadata, security diagnostics, cookie preferences.</p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>2. How We Use Information</h3>
                 <ul style={{ paddingLeft: '20px', marginBottom: '16px' }}>
                   <li>Create and maintain user accounts.</li>
-                  <li>Process orders, payments and deliver coupon vouchers.</li>
+                  <li>Process orders, payments and deliver pass vouchers.</li>
                   <li>Verify eligibility and prevent fraud.</li>
                   <li>Administer campaigns and communicate results.</li>
                   <li>Provide customer support and dispute resolution.</li>
@@ -283,7 +283,7 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
                   <strong>Last Updated:</strong> October 2026
                 </p>
                 <p>
-                  This policy explains how cancellations, failed payments, refund requests, and changes to 1ticket coupon purchases are handled.
+                  This policy explains how cancellations, failed payments, refund requests, and changes to 1ticket pass purchases are handled.
                 </p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>1. Failed or Incomplete Payments</h3>
@@ -308,7 +308,7 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>4. How to Request a Refund</h3>
                 <p>
-                  Submit your registered name, Order ID / Coupon ID, payment reference, and reason for request to our official support team. Approved refunds typically reflect in 5-7 business days depending on your bank.
+                  Submit your registered name, Order ID / Pass ID, payment reference, and reason for request to our official support team. Approved refunds typically reflect in 5-7 business days depending on your bank.
                 </p>
               </div>
             )}
@@ -323,17 +323,17 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
                   <strong>Last Updated:</strong> October 2026
                 </p>
                 <p>
-                  The information published on 1ticket is intended to help visitors understand available coupons, promotions, and related services. Please read the following information together with the terms for the specific offer you intend to purchase.
+                  The information published on 1ticket is intended to help visitors understand available passes, promotions, and related services. Please read the following information together with the terms for the specific offer you intend to purchase.
                 </p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>1. Offer Information & Illustrations</h3>
                 <p>
-                  Coupon descriptions, promotional images, advertised prices, benefits, and illustrations are provided to explain the relevant offer. Images of villas, plots, cars, gifts, artwork, and other products may be illustrative. Actual specifications, availability, appearance, and inclusions may vary.
+                  Pass descriptions, promotional images, advertised prices, benefits, and illustrations are provided to explain the relevant offer. Images of villas, plots, cars, gifts, artwork, and other products may be illustrative. Actual specifications, availability, appearance, and inclusions may vary.
                 </p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>2. Lucky Dip and Prize Offers</h3>
                 <p>
-                  A lucky-dip or prize-based promotion is subject to its official rules, eligibility requirements, valid entry conditions, and applicable law. Unless explicitly stated in a legally valid offer, buying a coupon does not guarantee a villa, car, cash reward, plot, or other prize.
+                  A lucky-dip or prize-based promotion is subject to its official rules, eligibility requirements, valid entry conditions, and applicable law. Unless explicitly stated in a legally valid offer, buying a pass does not guarantee a villa, car, cash reward, plot, or other prize.
                 </p>
 
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '24px', marginBottom: '8px' }}>3. No Investment Guarantee</h3>
@@ -347,19 +347,19 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
             {currentPolicy === 'coupon-policy' && (
               <div>
                 <h2 style={{ fontFamily: 'var(--font-serif)', color: '#f6c042', fontSize: '1.8rem', marginBottom: '8px' }}>
-                  Coupon Purchase and Redemption Policy
+                  Pass Purchase and Redemption Policy
                 </h2>
-                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>1. Coupon Purchase & Confirmation</h3>
+                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>1. Pass Purchase & Confirmation</h3>
                 <p>
-                  Coupons may be purchased through the website where an offer is available for sale. The applicable price, purchase limits, benefits, and eligibility requirements will be displayed before payment. A coupon becomes valid only when it has been officially issued with a unique coupon ID or QR code.
+                  Passes may be purchased through the website where an offer is available for sale. The applicable price, purchase limits, benefits, and eligibility requirements will be displayed before payment. A pass becomes valid only when it has been officially issued with a unique pass ID or QR code.
                 </p>
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>2. Redemption Procedure</h3>
                 <p>
-                  To redeem a coupon, follow the instructions on its details page. This may require presenting the coupon, verifying registered contact details, booking an eligible service, or completing another specified step within the stated validity period.
+                  To redeem a pass, follow the instructions on its details page. This may require presenting the pass, verifying registered contact details, booking an eligible service, or completing another specified step within the stated validity period.
                 </p>
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>3. Transfer & Resale Restrictions</h3>
                 <p>
-                  A coupon may not be transferred or resold unless its specific terms permit it. Altered, duplicated, stolen, or fraudulently obtained coupons may be suspended or rejected.
+                  A pass may not be transferred or resold unless its specific terms permit it. Altered, duplicated, stolen, or fraudulently obtained passes may be suspended or rejected.
                 </p>
               </div>
             )}
@@ -408,11 +408,11 @@ export default function LegalModal({ activeTab = 'terms', onClose }) {
                   Shipping and Delivery Policy
                 </h2>
                 <p>
-                  1ticket primarily provides digital coupon and promotional information through its website. Delivery arrangements depend on the offer purchased.
+                  1ticket primarily provides digital pass and promotional information through its website. Delivery arrangements depend on the offer purchased.
                 </p>
-                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>Digital Coupons:</h3>
+                <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>Digital Passes:</h3>
                 <p>
-                  Coupons are made available digitally in the customer's account under 'My Coupons' or sent to the registered email address immediately upon payment confirmation.
+                  Passes are made available digitally in the customer's account under 'My Passes' or sent to the registered email address immediately upon payment confirmation.
                 </p>
                 <h3 style={{ color: '#fff', fontSize: '1.2rem', marginTop: '20px', marginBottom: '8px' }}>Physical Products, Kits & Gifts:</h3>
                 <p>

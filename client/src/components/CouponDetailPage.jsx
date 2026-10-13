@@ -86,10 +86,10 @@ export default function CouponDetailPage({
   if (!coupon) {
     return (
       <div style={{ minHeight: '80vh', padding: '60px 24px', textAlign: 'center', color: '#fff' }}>
-        <h2 style={{ color: '#f6c042' }}>Coupon Not Found</h2>
-        <p style={{ color: '#9ca3af', margin: '12px 0 24px' }}>The requested exclusive coupon could not be retrieved.</p>
+        <h2 style={{ color: '#f6c042' }}>Pass Not Found</h2>
+        <p style={{ color: '#9ca3af', margin: '12px 0 24px' }}>The requested exclusive pass could not be retrieved.</p>
         <button onClick={onBack} className="btn-gold">
-          <ArrowLeft size={16} /> Return to Coupons
+          <ArrowLeft size={16} /> Return to Passes
         </button>
       </div>
     );
@@ -111,7 +111,7 @@ export default function CouponDetailPage({
       return;
     }
     if (!primaryEmail.trim() || !primaryEmail.includes('@')) {
-      setError('Please provide a valid email address for receiving your digital coupon & QR code pass.');
+      setError('Please provide a valid email address for receiving your digital pass & QR code.');
       return;
     }
     const cleanPrimaryPhone = primaryPhone.replace(/[^0-9]/g, '');
@@ -292,11 +292,11 @@ export default function CouponDetailPage({
             className="coupon-back-btn"
           >
             <ArrowLeft size={16} />
-            <span>Back to All Coupons</span>
+            <span>Back to All Passes</span>
           </button>
 
           <div className="coupon-breadcrumb-trail">
-            <span>Coupons</span>
+            <span>Passes</span>
             <span>/</span>
             <span style={{ color: '#d1d5db' }}>{coupon.category || 'Exclusive Offer'}</span>
             <span>/</span>
@@ -543,7 +543,7 @@ export default function CouponDetailPage({
               {activeTab === 'benefits' && (
                 <div>
                   <h3 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '14px' }}>
-                    What You Receive With This Coupon
+                    What You Receive With This Pass
                   </h3>
                   <ul style={{ paddingLeft: '20px', color: '#d1d5db', fontSize: '0.92rem' }}>
                     <li style={{ marginBottom: '10px' }}>
@@ -556,7 +556,7 @@ export default function CouponDetailPage({
                       <strong style={{ color: '#f6c042' }}>Email Confirmation with Voucher:</strong> Immediate backup sent directly to your registered inbox.
                     </li>
                     <li style={{ marginBottom: '10px' }}>
-                      <strong style={{ color: '#f6c042' }}>Wallet Access:</strong> Retrieve anytime from the "My Coupons" navigation bar using your email & mobile number.
+                      <strong style={{ color: '#f6c042' }}>Wallet Access:</strong> Retrieve anytime from the "My Passes" navigation bar using your email & mobile number.
                     </li>
                   </ul>
                 </div>
@@ -568,7 +568,7 @@ export default function CouponDetailPage({
                     Important Terms of Purchase
                   </h3>
                   <p style={{ color: '#9ca3af', fontSize: '0.88rem' }}>
-                    1. Each coupon contains a unique serial cryptographic token and QR matrix.
+                    1. Each pass contains a unique serial cryptographic token and QR matrix.
                     <br />
                     2. Passes are non-transferable once scanned and redeemed at the verification terminal.
                     <br />
@@ -597,7 +597,7 @@ export default function CouponDetailPage({
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '16px' }}>
                 <div>
                   <span style={{ fontSize: '0.72rem', color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>
-                    COUPON PRICE
+                    PASS PRICE
                   </span>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
                     <span style={{ fontSize: '2rem', fontWeight: 800, color: '#f6c042' }}>
@@ -744,7 +744,7 @@ export default function CouponDetailPage({
                     <div>
                       <input
                         type="email"
-                        placeholder="Email (for Coupon & QR Pass delivery) *"
+                        placeholder="Email (for Pass & QR delivery) *"
                         value={primaryEmail}
                         onChange={(e) => setPrimaryEmail(e.target.value)}
                         required
